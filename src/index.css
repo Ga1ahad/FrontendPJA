@@ -18,11 +18,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.area-1{
+  background-color: black;
+  margin-right: 150px;
+  margin-left: 150px;
 
-.white {
-  background:
-  white,
-  reapeat;
+}
+
+.area-2{
+  padding-top: 1px;
+  background-color: white;
   background-size: cover;
+  
+}
+
+h1 {
+  color: steelblue;
+  text-align: center;
+  font-size: 48px;
+    background-size: cover;
 
 }

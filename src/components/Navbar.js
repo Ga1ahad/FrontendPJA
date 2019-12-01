@@ -11,9 +11,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Typography from "@material-ui/core/Typography";
-import Wardrobe from './Wardrobe';
 import {BrowserRouter , Route, Switch, Link} from "react-router-dom";
-
+import Wardrobe from './Wardrobe';
+import MyAccount from './MyAccount';
+import PlanTrip from './PlanTrip';
+import Profile from './Profile';
+import ViewSetForADay from './ViewSetForADay';
+import ViewSets from './ViewSets';
+import AddCloth from './AddCloth';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -51,24 +56,49 @@ const NavBar = () => {
                          <MenuIcon />
                     </IconButton>
                     <Grid item xs={3} md={'auto'}>
-                        <ButtonGroup                       
-                            variant="contained"
-                            color="initial"
-                            size="large"                                                                                                           
-                            >
-                            <Link to="/Wardrobe">
-                            <Button
-                               variant="contained"
-                               color="initial"
-                               size="large"  
-                               >Wardrobe</Button>
+                 
+                              <Link to="/Wardrobe">
+                                  <Button
+                                            variant="contained"
+                                            color="initial"
+                                            size="large"  
+                                >Wardrobe</Button>
                             </Link>
-                            <Button>View sets</Button>
-                            <Button>View set for a day</Button>
-                            <Button>Plan trip</Button>
-                            <Button>Add cloth</Button>
-                            <Button>View profile</Button>
-                        </ButtonGroup>
+                            
+                            <Link to="/ViewSets">
+                                <Button
+                                            variant="contained"
+                                            color="initial"
+                                            size="large" 
+                                >View sets</Button>
+                            </Link>
+      
+                            <Link to="/ViewSetForADay">
+                              <Button
+                                          variant="contained"
+                                          color="initial"
+                                          size="large"  
+                              >View set for a day</Button>
+                            </Link>
+
+                            <Link to="/PlanTrip">
+                                <Button
+                                            variant="contained"
+                                            color="initial"
+                                            size="large"  
+                                >Plan trip</Button>
+                            </Link>
+
+                            <Link to="/AddCloth">
+                                <Button
+                                            variant="contained"
+                                            color="initial"
+                                            size="large"  
+                                >Add cloth</Button>
+                            </Link>
+                     
+                           
+                     
                 
                    </Grid>
                 <Typography variant="h3" className={classes.title} >

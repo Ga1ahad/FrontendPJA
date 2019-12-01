@@ -10,9 +10,10 @@ import {BrowserRouter , Route, Switch} from "react-router-dom";
 function App() {
   return (
     <BrowserRouter>
-      <div className="bg">  
+      <div className = "bg">  
         <NavBar />
        <Route path = "/Wardrobe" component ={Wardrobe}/>
+       
       </div>
     </BrowserRouter>
   
