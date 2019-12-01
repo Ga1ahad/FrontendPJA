@@ -2,7 +2,9 @@ import React, { Component, useState, useCallback } from 'react'
 import { render } from "react-dom";
 import Gallery from "react-photo-gallery";
 import Carousel, { Modal, ModalGateway } from "react-images";
-import { photos } from "./photos";
+import { Shirts } from "./Shirts";
+import { TShirts } from "./TShirts";
+
 
 
 
@@ -27,13 +29,13 @@ const closeLightbox = () => {
 
       <div className="area-1">
         
-            <Gallery photos={photos} onClick={openLightbox} />
+            <Gallery photos={TShirts} onClick={openLightbox} />
                 <ModalGateway>
                   {viewerIsOpen ? (
                     <Modal onClose={closeLightbox}>
                       <Carousel
                         currentIndex={currentImage}
-                        views={photos.map(x => ({
+                        views={TShirts.map(x => ({
                           ...x,
                           srcset: x.srcSet,
                           caption: x.title
@@ -50,13 +52,13 @@ const closeLightbox = () => {
 
         <div className="area-1">
         
-        <Gallery photos={photos} onClick={openLightbox} />
+        <Gallery photos={Shirts} onClick={openLightbox} />
             <ModalGateway>
               {viewerIsOpen ? (
                 <Modal onClose={closeLightbox}>
                   <Carousel
                     currentIndex={currentImage}
-                    views={photos.map(x => ({
+                    views={Shirts.map(x => ({
                       ...x,
                       srcset: x.srcSet,
                       caption: x.title

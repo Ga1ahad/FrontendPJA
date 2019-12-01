@@ -1,4 +1,4 @@
-export const photos = [
+export const TShirts = [
     {
       src: "https://source.unsplash.com/WWesmHEgXDs/800x599",
       width: 4,
