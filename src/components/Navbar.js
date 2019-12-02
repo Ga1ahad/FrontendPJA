@@ -3,7 +3,6 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';    
 import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,13 +11,7 @@ import Menu from '@material-ui/core/Menu';
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Typography from "@material-ui/core/Typography";
 import {BrowserRouter , Route, Switch, Link} from "react-router-dom";
-import Wardrobe from './Wardrobe';
-import MyAccount from './MyAccount';
-import PlanTrip from './PlanTrip';
-import Profile from './Profile';
-import ViewSetForADay from './ViewSetForADay';
-import ViewSets from './ViewSets';
-import AddCloth from './AddCloth';
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -131,9 +124,15 @@ const NavBar = () => {
                             }}
                             open={open}
                             onClose={handleClose}
-                        >
-                            <MenuItem onClick={handleClose}>Profile</MenuItem>
-                            <MenuItem onClick={handleClose}>My account</MenuItem>
+                        >   
+                             <Link to="/Profile">
+                             <MenuItem onClick={handleClose}>Profile</MenuItem>
+                             </Link>
+                
+                             <Link to="/MyAccount">
+                             <MenuItem onClick={handleClose}>My account</MenuItem>
+                             </Link>
+                    
                         </Menu>
             </div>
           )}

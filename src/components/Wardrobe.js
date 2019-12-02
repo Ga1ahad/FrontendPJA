@@ -68,7 +68,7 @@ const closeLightbox = () => {
               ) : null}
             </ModalGateway>
     </div>
-
+    <h1></h1>
         </div>
     )
 }
