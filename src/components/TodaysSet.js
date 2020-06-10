@@ -1,13 +1,9 @@
-import React, { Component, useState, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import Gallery from "react-photo-gallery";
 import Carousel, { Modal, ModalGateway } from "react-images";
 import { Sets } from "./Sets";
 
-
-
-
-
-export default function ViewSets() {
+export default function TodaysSet() {
     
 const [currentImage, setCurrentImage] = useState(0);
 const [viewerIsOpen, setViewerIsOpen] = useState(false);

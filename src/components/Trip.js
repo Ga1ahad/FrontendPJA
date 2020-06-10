@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class ViewSetForADay extends Component {
+export class Trip extends Component {
     render() {
         return (
             <div>
@@ -10,4 +10,4 @@ export class ViewSetForADay extends Component {
     }
 }
 
-export default ViewSetForADay
+export default Trip

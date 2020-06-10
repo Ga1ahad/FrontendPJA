@@ -1,13 +1,8 @@
-import React, { Component, useState, useCallback } from 'react'
-import { render } from "react-dom";
+import React, {useState, useCallback } from 'react'
 import Gallery from "react-photo-gallery";
 import Carousel, { Modal, ModalGateway } from "react-images";
 import { Shirts } from "./Shirts";
 import { TShirts } from "./TShirts";
-
-
-
-
 
 export default function Wardrobe() {
     
@@ -25,33 +20,26 @@ const closeLightbox = () => {
 };
     return (
       <div className="area-2">
-                    <h1>T-Shirts</h1>
-
-      <div className="area-1">
-        
-            <Gallery photos={TShirts} onClick={openLightbox} />
-                <ModalGateway>
-                  {viewerIsOpen ? (
-                    <Modal onClose={closeLightbox}>
-                      <Carousel
-                        currentIndex={currentImage}
-                        views={TShirts.map(x => ({
-                          ...x,
-                          srcset: x.srcSet,
-                          caption: x.title
-                        }))}
-                      />
-                    </Modal>
-                  ) : null}
-                </ModalGateway>
-        </div>
-          
-          
-
+        <h1>T-Shirts</h1>
+      <div className="area-1">  
+        <Gallery photos={TShirts} onClick={openLightbox} />
+        <ModalGateway>
+          {viewerIsOpen ? (
+            <Modal onClose={closeLightbox}>
+              <Carousel
+                currentIndex={currentImage}
+                views={TShirts.map(x => ({
+                  ...x,
+                  srcset: x.srcSet,
+                  caption: x.title
+                }))}
+              />
+            </Modal>
+          ) : null}
+        </ModalGateway>
+        </div>        
         <h1>Shirts</h1>
-
         <div className="area-1">
-        
         <Gallery photos={Shirts} onClick={openLightbox} />
             <ModalGateway>
               {viewerIsOpen ? (
