@@ -1,3 +1,5 @@
+## Clothesy - frontend
+
 * assets - folder where you store all assets related to your application such as fonts, icons and images
 * components - to delete, old components are stored in there
 * screens - contains sturucture of the project divided by roles, in each role folder we will find: 
