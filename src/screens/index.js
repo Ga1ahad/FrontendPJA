@@ -8,6 +8,10 @@ import { routes } from './utils/helpers/routing';
 import Login from './Auth/Login';
 import UpsertPassword from './Auth/UpsertPassword';
 import Wardrobe from './User/Wardrobe/index.js';
+import AddClothes from './User/Clothes/add.js';
+import EditClothes from './User/Clothes/edit.js';
+import AddTrip from './User/Trip/add.js'
+import Trip from './User/Trip/list.js'
 
 const renderRoute = route => <Route key={route.path} {...route} />;
 
@@ -20,6 +24,10 @@ const App = () => {
             <Route path="/login" component={Login} />
             <Route path={["/reset-password", "/register"]} component={UpsertPassword} />
             <Route path="/wardrobe" component={Wardrobe} />
+            <Route path="/clothes/add" component={AddClothes} />
+            <Route path="/clothes/edit" component={EditClothes} />
+            <Route path="/trip/add" component={AddTrip} />
+            <Route path="/trip/list" component={Trip} />
             {/* <Route path="/admin" component={Admin} /> */}
             {/* {routes.map(renderRoute)} */}
           </Suspense>

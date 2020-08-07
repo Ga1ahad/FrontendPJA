@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import './wardrobe.css';
+import '../../index.css';
 import Divider from '@material-ui/core/Divider';
 import Tooltip from '@material-ui/core/Tooltip';
 import AddIcon from '@material-ui/icons/Add';
@@ -20,7 +20,7 @@ const rows = [
 ];
 
 function createData(address, name, type, tags, add_date) {
-    return { address, name, type, tags, add_date };
+    return { address, name, type, tags, add_date }; 
   }
 
 const Wardrobe = () => {
