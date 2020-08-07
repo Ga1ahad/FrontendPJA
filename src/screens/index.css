@@ -21,3 +21,64 @@
 .App-link {
   color: #09d3ac;
 }
+
+.paper {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-right: 50px;
+  margin-left: 50px;  
+  padding: 50px;
+}
+.pic {
+  width: 350px;
+  height: 500px;
+}
+.formControl {
+  width: 5%;      
+  margin-top: 150px;
+}
+.layout {
+  margin-top: 150px;
+}
+.btn {
+  float: right;
+}
+
+h2 {
+  text-decoration: underline;
+  margin: 0;
+  float: left;
+  font-family:"Times New Roman";
+  font-size: 30px;
+}
+
+.tool {
+  float: right;
+}
+
+.paper {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-right: 50px;
+  margin-left: 50px;  
+  padding: 50px;
+}
+.pic {
+  width: 350px;
+  height: 500px;
+}
+.formControl {
+  width: 5%;      
+  margin-top: 150px;
+}
+.layout {
+  margin-top: 150px;
+}
+.btn {
+  float: right;
+}
+.addIcon {
+  width: 60;
+  height: 60;
+}
+
