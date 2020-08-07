@@ -7,6 +7,7 @@ import { routes } from './utils/helpers/routing';
 // import Admin from './Admin/routes';
 import Login from './Auth/Login';
 import UpsertPassword from './Auth/UpsertPassword';
+import Wardrobe from './User/Wardrobe/index.js';
 
 const renderRoute = route => <Route key={route.path} {...route} />;
 
@@ -18,6 +19,7 @@ const App = () => {
             <Route path="/" exact render={() => <Redirect to="/login" />} />
             <Route path="/login" component={Login} />
             <Route path={["/reset-password", "/register"]} component={UpsertPassword} />
+            <Route path="/wardrobe" component={Wardrobe} />
             {/* <Route path="/admin" component={Admin} /> */}
             {/* {routes.map(renderRoute)} */}
           </Suspense>
