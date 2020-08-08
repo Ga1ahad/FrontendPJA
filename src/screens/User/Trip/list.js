@@ -33,7 +33,7 @@ const Trip = () => {
                     <Table aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                    <TableCell align="right">Nazwa</TableCell>
+                                <TableCell align="right">Nazwa</TableCell>
                                 <TableCell align="right">Początek</TableCell>
                                 <TableCell align="right">Koniec</TableCell>
                                 <TableCell align="right">Miejsce</TableCell>

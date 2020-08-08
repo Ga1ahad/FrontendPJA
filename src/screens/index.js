@@ -7,7 +7,7 @@ import { routes } from './utils/helpers/routing';
 // import Admin from './Admin/routes';
 import Login from './Auth/Login';
 import UpsertPassword from './Auth/UpsertPassword';
-import Wardrobe from './User/Wardrobe/index.js';
+import Wardrobe from './User/Clothes/list.js';
 import AddClothes from './User/Clothes/add.js';
 import EditClothes from './User/Clothes/edit.js';
 import AddTrip from './User/Trip/add.js'
@@ -23,7 +23,7 @@ const App = () => {
             <Route path="/" exact render={() => <Redirect to="/login" />} />
             <Route path="/login" component={Login} />
             <Route path={["/reset-password", "/register"]} component={UpsertPassword} />
-            <Route path="/wardrobe" component={Wardrobe} />
+            <Route path="/clothes/list" component={Wardrobe} />
             <Route path="/clothes/add" component={AddClothes} />
             <Route path="/clothes/edit" component={EditClothes} />
             <Route path="/trip/add" component={AddTrip} />
