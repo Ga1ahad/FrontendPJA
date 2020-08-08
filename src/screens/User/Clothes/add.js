@@ -37,44 +37,44 @@ const AddClothes = () => {
               />
             </Grid>  
             <Grid item xs = {12}>
-            <FormControl className="formControl">
-                <InputLabel id="demo-simple-select-label">Type</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                >
-                  <MenuItem value={'Shirt'}>T-Shirt</MenuItem>
-                  <MenuItem value={'Shirt'}>Shirt</MenuItem>
-                  <MenuItem value={'Pants'}>Pants</MenuItem>
-                </Select>
-            </FormControl> 
+              <FormControl className="formControl">
+                  <InputLabel id="demo-simple-select-label">Type</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                  >
+                    <MenuItem value={'Shirt'}>T-Shirt</MenuItem>
+                    <MenuItem value={'Shirt'}>Shirt</MenuItem>
+                    <MenuItem value={'Pants'}>Pants</MenuItem>
+                  </Select>
+              </FormControl> 
             </Grid>
             <Grid item xs = {12}>
-            <Autocomplete
-              multiple
-              id="tags-outlined"
-              options={tags}
-              getOptionLabel={(option) => option.title}
-              filterSelectedOptions
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  variant="outlined"
-                  label="Purpose"
-                  placeholder="Choose tags for cloth"
-                />
-              )}
-            />   
+              <Autocomplete
+                multiple
+                id="tags-outlined"
+                options={tags}
+                getOptionLabel={(option) => option.title}
+                filterSelectedOptions
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    variant="outlined"
+                    label="Purpose"
+                    placeholder="Choose tags for cloth"
+                  />
+                )}
+              />   
             </Grid>
             <Grid item xs = {12}>
-            <Button
-              className="btn"
-              variant="contained"
-              color="primary"
-              component={Link} to="/Wardrobe"
-            >
-              Add Cloth
-            </Button>
+              <Button
+                className="btn"
+                variant="contained"
+                color="primary"
+                component={Link} to="/Wardrobe"
+              >
+                Add Cloth
+              </Button>
             </Grid>
           </Grid>
       </Paper>
