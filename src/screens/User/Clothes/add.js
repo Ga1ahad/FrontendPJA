@@ -71,7 +71,7 @@ const AddClothes = () => {
                 className="btn"
                 variant="contained"
                 color="primary"
-                component={Link} to="/Wardrobe"
+                component={Link} to="/clothes/list"
               >
                 Add Cloth
               </Button>
