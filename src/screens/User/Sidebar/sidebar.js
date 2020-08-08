@@ -67,6 +67,9 @@ const Sidebar = () => {
       onKeyDown={toggleDrawer(side, false)}
     >
         <List>
+        <ListItem button component={Link} to="/" class="center">   
+            <ListItemIcon>  <img src="./Capture-1.png" alt="bug" height={50}/></ListItemIcon>
+          </ListItem> 
           <ListItem button component={Link} to="/clothes/list">      
             <ListItemIcon> <CollectionsRoundedIcon /></ListItemIcon>
             <ListItemText primary={'SZAFA'} />

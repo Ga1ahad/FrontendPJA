@@ -21,10 +21,10 @@ const App = () => {
     <Provider>
        <Router history={history}>
           <Suspense fallback="loading">
+          <Drawer/>
             <Route path="/" exact render={() => <Redirect to="/login" />} />
             <Route path="/login" component={Login} />
             <Route path={["/reset-password", "/register"]} component={UpsertPassword} />
-            <Drawer/>
             <Route path="/clothes/list" component={Wardrobe} />
             <Route path="/clothes/add" component={AddClothes} />
             <Route path="/clothes/edit" component={EditClothes} />
