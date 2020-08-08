@@ -26,7 +26,6 @@ const Wardrobe = () => {
         <div>
             <Paper className="paper" > 
                 <h2>WARDROBE</h2>
-
                     <Fab color="primary" className="tool">
                         <AddIcon />
                     </Fab>
