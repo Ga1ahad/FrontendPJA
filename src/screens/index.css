@@ -86,3 +86,20 @@ h2 {
   display: flex; 
   justify-content: center;
 }
+
+.paper2 {
+  margin-top: 150px;
+  margin-bottom: 150px;
+  margin-right: 600px;
+  margin-left: 600px;  
+  padding: 50px;
+}
+
+.avatar {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-right: 25px;
+  margin-left: 25px;
+  background-color: b; 
+}
+
