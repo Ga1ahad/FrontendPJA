@@ -10,30 +10,30 @@ import UpsertPassword from './Auth/UpsertPassword';
 import Wardrobe from './User/Clothes/list.js';
 import AddClothes from './User/Clothes/add.js';
 import EditClothes from './User/Clothes/edit.js';
-import AddTrip from './User/Trip/add.js'
-import Drawer from './User/Sidebar/sidebar.js'
-import Trip from './User/Trip/list.js'
+import AddTrip from './User/Trip/add.js';
+import Drawer from './User/Sidebar/sidebar.js';
+import Trip from './User/Trip/list.js';
 
-const renderRoute = route => <Route key={route.path} {...route} />;
+const renderRoute = (route) => <Route key={route.path} {...route} />;
 
 const App = () => {
   return (
     <Provider>
-       <Router history={history}>
-          <Suspense fallback="loading">
-          <Drawer/>
-            <Route path="/" exact render={() => <Redirect to="/login" />} />
-            <Route path="/login" component={Login} />
-            <Route path={["/reset-password", "/register"]} component={UpsertPassword} />
-            <Route path="/clothes/list" component={Wardrobe} />
-            <Route path="/clothes/add" component={AddClothes} />
-            <Route path="/clothes/edit" component={EditClothes} />
-            <Route path="/trip/add" component={AddTrip} />
-            <Route path="/trip/list" component={Trip} />
-            {/* <Route path="/admin" component={Admin} /> */}
-            {/* {routes.map(renderRoute)} */}
-          </Suspense>
-        </Router>
+      <Router history={history}>
+        <Suspense fallback="loading">
+          <Drawer />
+          <Route path="/" exact render={() => <Redirect to="/login" />} />
+          <Route path="/login" component={Login} />
+          <Route path={['/reset-password', '/register']} component={UpsertPassword} />
+          <Route path="/clothes/list" component={Wardrobe} />
+          <Route path="/clothes/add" component={AddClothes} />
+          <Route path="/clothes/edit" component={EditClothes} />
+          <Route path="/trip/add" component={AddTrip} />
+          <Route path="/trip/list" component={Trip} />
+          {/* <Route path="/admin" component={Admin} /> */}
+          {/* {routes.map(renderRoute)} */}
+        </Suspense>
+      </Router>
     </Provider>
   );
 };
