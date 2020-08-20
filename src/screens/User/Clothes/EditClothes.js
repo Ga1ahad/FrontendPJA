@@ -1,14 +1,8 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import { Grid, Button, Paper, TextField, InputLabel, MenuItem, FormControl, Select } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Link } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
+
 import '../../index.css';
 
 const tags = [
@@ -23,7 +17,7 @@ const EditClothes = () => {
     <Paper className="paper">
       <Grid container spacing={3} direction="column" justify="space-between">
         <Grid container justify="center">
-          <img className="pic" src="https://source.unsplash.com/9qd0iQ8otbU/600x799" />
+          <img className="pic" src="https://source.unsplash.com/9qd0iQ8otbU/600x799" alt="pic" />
         </Grid>
         <Grid item xs={12}>
           <TextField id="clothName" name="clothName" label="Name" fullWidth />

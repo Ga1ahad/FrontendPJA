@@ -1,13 +1,6 @@
 import React from 'react'
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Fab } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import Fab from '@material-ui/core/Fab';
 
 import '../../index.css';
 

@@ -2,8 +2,6 @@ import './index.css';
 import React, { Suspense } from 'react';
 import { Router, Route, Redirect } from 'react-router-dom';
 import { Provider, history } from './utils/storage/store';
-import { routes } from './utils/helpers/routing';
-
 // import Admin from './Admin/routes';
 import Login from './Auth/Login';
 import UpsertPassword from './Auth/UpsertPassword';
@@ -13,8 +11,6 @@ import EditClothes from './User/Clothes/EditClothes.js';
 import AddTrip from './User/Trip/AddTrip.js';
 import Drawer from './User/Sidebar/Sidebar.js';
 import ListTrip from './User/Trip/ListTrip.js';
-
-const renderRoute = (route) => <Route key={route.path} {...route} />;
 
 const App = () => {
   return (

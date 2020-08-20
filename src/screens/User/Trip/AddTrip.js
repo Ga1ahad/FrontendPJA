@@ -1,31 +1,28 @@
 import React from 'react'
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
-import {Link} from "react-router-dom";
-import Button from '@material-ui/core/Button';
+import { Grid, Button, Paper, TextField } from '@material-ui/core';
+import { Link } from "react-router-dom";
 
 import '../../index.css'
 
 const AddTrip = () => {
     return (
         <div >
-            <Paper className="paper " > 
-                <Grid container spacing={3} alignItems="stretch" container spacing={5} >
-                    <Grid item xs={12}  > 
-                        <TextField 
+            <Paper className="paper " >
+                <Grid alignItems="stretch" container spacing={5} >
+                    <Grid item xs={12}  >
+                        <TextField
                             id="tripName"
                             name="tripName"
                             label="Nazwa podróży"
                             fullWidth
                         />
-                    </Grid>  
+                    </Grid>
                     <Grid item xs={12} sm={6}>
                         <TextField
                             type="date"
                             label="Początek"
                             InputLabelProps={{
-                            shrink: true,
+                                shrink: true,
                             }}
                         />
                     </Grid>
@@ -34,12 +31,12 @@ const AddTrip = () => {
                             type="date"
                             label="Koniec"
                             InputLabelProps={{
-                            shrink: true,
+                                shrink: true,
                             }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField 
+                        <TextField
                             id="tripName"
                             name="tripName"
                             label="Miejscowość"
@@ -47,19 +44,19 @@ const AddTrip = () => {
                         />
                     </Grid>
                     <Grid item xs={12} sm={6} >
-                        <TextField 
+                        <TextField
                             id="tripName"
                             name="tripName"
                             label="Kraj"
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs = {12}>
+                    <Grid item xs={12}>
                         <Button
-                        className="btn"
-                        variant="contained"
-                        color="primary"
-                        component={Link} to="/Wardrobe"
+                            className="btn"
+                            variant="contained"
+                            color="primary"
+                            component={Link} to="/Wardrobe"
                         >
                             Zatwiedź
                         </Button>
