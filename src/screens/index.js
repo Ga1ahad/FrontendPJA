@@ -7,12 +7,12 @@ import { routes } from './utils/helpers/routing';
 // import Admin from './Admin/routes';
 import Login from './Auth/Login';
 import UpsertPassword from './Auth/UpsertPassword';
-import Wardrobe from './User/Clothes/list.js';
-import AddClothes from './User/Clothes/add.js';
-import EditClothes from './User/Clothes/edit.js';
-import AddTrip from './User/Trip/add.js';
-import Drawer from './User/Sidebar/sidebar.js';
-import Trip from './User/Trip/list.js';
+import Wardrobe from './User/Clothes/Wardrobe.js';
+import AddClothes from './User/Clothes/AddClothes.js';
+import EditClothes from './User/Clothes/EditClothes.js';
+import AddTrip from './User/Trip/AddTrip.js';
+import Drawer from './User/Sidebar/Sidebar.js';
+import ListTrip from './User/Trip/ListTrip.js';
 
 const renderRoute = (route) => <Route key={route.path} {...route} />;
 
@@ -29,7 +29,7 @@ const App = () => {
           <Route path="/clothes/add" component={AddClothes} />
           <Route path="/clothes/edit" component={EditClothes} />
           <Route path="/trip/add" component={AddTrip} />
-          <Route path="/trip/list" component={Trip} />
+          <Route path="/trip/list" component={ListTrip} />
           {/* <Route path="/admin" component={Admin} /> */}
           {/* {routes.map(renderRoute)} */}
         </Suspense>
