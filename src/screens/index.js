@@ -26,7 +26,6 @@ const App = () => {
                   path={prop.path}
                   component={prop.component}
                   exact={prop.exact || false}
-                  key={`route-${key}`}
                 />
               );
             })}
