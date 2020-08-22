@@ -1,6 +1,8 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Container, CssBaseline, TextField, Button, Paper, Grid, Typography } from "@material-ui/core";
+
 import * as Yup from 'yup';
 
 const LoginSchema = Yup.object().shape({
@@ -8,13 +10,21 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
 });
 
-const styles = {
-  container: {
-    backgroundColor: 'yellow !important',
+const useStyles = makeStyles(theme => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: theme.spacing(4),
   },
-};
+  form: {
+    marginTop: theme.spacing(3)
+  },
+}));
 
-const Login = ({ classes }) => {
+const Login = ({ log }) => {
+  const classes = useStyles();
   const handleSubmit = (values, { setSubmitting }) => {
     console.log('TODO: handle submit');
     setTimeout(() => {
@@ -32,30 +42,68 @@ const Login = ({ classes }) => {
     return errors;
   };
 
-  console.log(classes);
+  console.log(log);
 
   return (
-    <div className={classes.container}>
-      Sign in
-      <Formik
-        initialValues={{ email: '', password: '' }}
-        onSubmit={handleSubmit}
-        validationSchema={LoginSchema}
-      >
-        {({ isSubmitting }) => (
-          <Form>
-            <Field type="email" name="email" />
-            <ErrorMessage name="email" component="div" />
-            <Field type="password" name="password" />
-            <ErrorMessage name="password" component="div" />
-            <button type="submit" disabled={isSubmitting}>
-              Sign in
-            </button>
-          </Form>
-        )}
-      </Formik>
-    </div>
+
+    <Container component="main" maxWidth="xs">
+      <Paper className={classes.paper} >
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
+        <CssBaseline />
+        <Formik
+          initialValues={{ email: '', password: '' }}
+          onSubmit={handleSubmit}
+          validationSchema={LoginSchema}
+        >
+          {({ errors, handleChange, touched }) => (
+            <Form className={classes.form}>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    type="email"
+                    name="email"
+                    label="Email"
+                    fullWidth
+                    variant="outlined"
+                    onChange={handleChange}
+                    autoComplete="email"
+                    helperText={
+                      errors.email && touched.email ? errors.email : null
+                    }
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    type="password"
+                    name="password"
+                    label="Password"
+                    fullWidth
+                    variant="outlined"
+                    onChange={handleChange}
+                    helperText={
+                      errors.password && touched.password ? errors.password : null
+                    }
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                  >
+                    Sign in
+                </Button>
+                </Grid>
+              </Grid>
+            </Form>
+          )}
+        </Formik>
+      </Paper>
+    </Container>
   );
 };
 
-export default withStyles(styles)(Login);
+export default withStyles(useStyles)(Login);
