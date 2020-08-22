@@ -1,132 +1,113 @@
-import React from 'react';
-import { AppBar, Toolbar, IconButton, makeStyles, MenuItem, Menu, Typography, List, ListItem, ListItemIcon, ListItemText, Drawer } from '@material-ui/core';
-import { WorkRounded, CalendarTodayRounded, AddRounded, TodayRounded, CollectionsRounded, AccountCircle } from '@material-ui/icons';
-import MenuIcon from '@material-ui/icons/Menu';
+import React from "react";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import clsx from "clsx";
+import { ChevronLeft, ChevronRight, Menu } from '@material-ui/icons';
 import { Link } from "react-router-dom";
+import { List, ListItem, ListItemText, ListItemIcon, Drawer, AppBar, IconButton, Toolbar } from '@material-ui/core';
 
-//zmiana
-const useStyles = makeStyles(theme => ({
+const drawerWidth = 240;
+
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    display: "flex"
+  },
+  appBar: {
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    })
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen
+    })
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(2)
   },
-  title: {
-    flexGrow: 1,
-  }
+  hide: {
+    display: "none"
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0
+  },
+  drawerPaper: {
+    width: drawerWidth
+  },
+  drawerHeader: {
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(0, 1),
+    ...theme.mixins.toolbar,
+    justifyContent: "flex-end"
+  },
 }));
-const Sidebar = () => {
+
+export default function Sidebar({ routes }) {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
-  const toggleDrawer = (side, open) => event => {
-    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
 
-    setState({ ...state, [side]: open });
+  const handleDrawerOpen = () => {
+    setOpen(true);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const handleDrawerClose = () => {
+    setOpen(false);
   };
 
-  const handleMenu = event => {
-    setAnchorEl(event.currentTarget);
-  };
-  const sideList = side => (
-
-    <div
-      className={classes.list}
-      role="presentation"
-      onClick={toggleDrawer(side, false)}
-      onKeyDown={toggleDrawer(side, false)}
-    >
-      <List>
-        <ListItem button component={Link} to="/" class="center">
-          <ListItemIcon>  <img src="./Capture-1.png" alt="bug" height={50} /></ListItemIcon>
-        </ListItem>
-        <ListItem button component={Link} to="/clothes/list">
-          <ListItemIcon> <CollectionsRounded /></ListItemIcon>
-          <ListItemText primary={'SZAFA'} />
-        </ListItem>
-        <ListItem button component={Link} to="/TodaysSet">
-          <ListItemIcon> <TodayRounded /></ListItemIcon>
-          <ListItemText primary={"ZESTAW NA DZIŚ"} />
-        </ListItem>
-        <ListItem button component={Link} to="/clothes/add">
-          <ListItemIcon> <AddRounded /></ListItemIcon>
-          <ListItemText primary={'DODAJ UBRNIE'} />
-        </ListItem>
-        <ListItem button component={Link} to="/trip/list">
-          <ListItemIcon> <WorkRounded /></ListItemIcon>
-          <ListItemText primary={'PODRÓŻE'} />
-        </ListItem>
-        <ListItem button component={Link} to="/trip/add">
-          <ListItemIcon> <CalendarTodayRounded /></ListItemIcon>
-          <ListItemText primary={'PLANOWANIE PODRÓŻY'} />
-        </ListItem>
-      </List>
-    </div>
-  );
   return (
-    <div>
-      <AppBar position="static">
+    <div className={classes.root}>
+      <AppBar
+        position="fixed"
+        className={clsx(classes.appBar, {
+          [classes.appBarShift]: open
+        })}
+      >
         <Toolbar>
-          <IconButton onClick={toggleDrawer('left', true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu" >
-            <MenuIcon />
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            className={clsx(classes.menuButton, open && classes.hide)}
+          >
+            <Menu />
           </IconButton>
-          <Drawer open={state.left} onClose={toggleDrawer('left', false)}>
-            {sideList('left')}
-          </Drawer>
-          <Typography variant="h3" className={classes.title} >
-          </Typography>
-          {auth && (
-            <div>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <Link to="/Profile">
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                </Link>
-                <Link to="/MyAccount">
-                  <MenuItem onClick={handleClose}>My account</MenuItem>
-                </Link>
-              </Menu>
-            </div>
-          )}
         </Toolbar>
       </AppBar>
+      <Drawer
+        className={classes.drawer}
+        variant="persistent"
+        anchor="left"
+        open={open}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div className={classes.drawerHeader}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'ltr' ? <ChevronLeft /> : <ChevronRight />}
+          </IconButton>
+        </div>
+        <List>
+          {routes.map(({ path, noRender, sidebarName, ...prop }, index) => {
+            if (noRender) return null;
+            return (
+              <ListItem button to={path} component={Link}>
+                <ListItemIcon>
+                  <prop.icon />
+                </ListItemIcon>
+                <ListItemText primary={sidebarName} />
+              </ListItem>
+            );
+          })}
+        </List>
+      </Drawer>
     </div>
-  )
+  );
 }
-export default Sidebar;
