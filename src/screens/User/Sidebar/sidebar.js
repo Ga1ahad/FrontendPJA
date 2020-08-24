@@ -95,8 +95,7 @@ export default function Sidebar({ routes }) {
           </IconButton>
         </div>
         <List>
-          {routes.map(({ path, noRender, sidebarName, ...prop }, index) => {
-            if (noRender) return null;
+          {routes.map(({ path, sidebarName, ...prop }, index) => {
             return (
               <ListItem button to={path} component={Link}>
                 <ListItemIcon>
