@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { ChevronLeft, ChevronRight, Menu } from '@material-ui/icons';
 import { Link } from "react-router-dom";
 import { List, ListItem, ListItemText, ListItemIcon, Drawer, AppBar, IconButton, Toolbar } from '@material-ui/core';
+import Logo from '../../../assets/images/clothesy.png';
 
 const drawerWidth = 240;
 
@@ -44,6 +45,11 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
     justifyContent: "flex-end"
+  },
+  logo: {
+    height: '70%',
+    width: '70%',
+    margin: 'auto'
   },
 }));
 
@@ -95,6 +101,9 @@ export default function Sidebar({ routes }) {
           </IconButton>
         </div>
         <List>
+          <ListItem button component={Link} to="/">
+            <img src={Logo} className={classes.logo} />
+          </ListItem>
           {routes.map(({ path, sidebarName, ...prop }, index) => {
             return (
               <ListItem button to={path} component={Link}>
