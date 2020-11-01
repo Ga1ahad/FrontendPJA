@@ -19,7 +19,7 @@ const useStyles = makeStyles({
 });
 
 const ReactTable = (props) => {
-    const { columns, rows } = props;
+    const { columns, rows, siteName } = props;
 
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
@@ -36,7 +36,7 @@ const ReactTable = (props) => {
     return (
         <div>
             <Paper className="paper">
-                <h2>WARDROBE</h2>
+                <h2>{siteName}</h2>
                 <Fab color="primary" className="tool">
                     <AddIcon />
                 </Fab>
