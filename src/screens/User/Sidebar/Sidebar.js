@@ -101,12 +101,12 @@ export default function Sidebar({ routes }) {
           </IconButton>
         </div>
         <List>
-          <ListItem button component={Link} to="/">
+          <ListItem button component={Link} to="/" onClick={handleDrawerClose}>
             <img src={Logo} className={classes.logo} />
           </ListItem>
           {routes.map(({ path, sidebarName, ...prop }, index) => {
             return (
-              <ListItem button to={path} component={Link}>
+              <ListItem button to={path} component={Link} onClick={handleDrawerClose}>
                 <ListItemIcon>
                   <prop.icon />
                 </ListItemIcon>
