@@ -29,6 +29,7 @@ const AddClothes = ({ log }) => {
 
   return (
     <Paper className="paper">
+      <h2>DODAWANIE UBRAŃ</h2>
       <Formik
         initialValues={{ clothName: '', purpose: '' }}
         onSubmit={handleSubmit}

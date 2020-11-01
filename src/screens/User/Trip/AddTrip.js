@@ -1,7 +1,6 @@
 import React from 'react'
 import { Grid, Button, Paper, TextField } from '@material-ui/core';
-import { Link } from "react-router-dom";
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, } from 'formik';
 
 import '../../index.css'
 import * as Yup from 'yup';
@@ -22,7 +21,8 @@ const AddTrip = () => {
     };
     return (
         <div >
-            <Paper className="paper " >
+            <Paper className="paper" >
+                <h2>PLANOWANIE PODRÓŻY</h2>
                 <Formik
                     initialValues={{ tripName: '', start: '', end: '', city: '', country: '', }}
                     onSubmit={handleSubmit}
