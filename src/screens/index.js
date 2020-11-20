@@ -6,7 +6,7 @@ import { Provider, history } from './utils/storage/store';
 import Login from './Auth/Login';
 import UpsertPassword from './Auth/UpsertPassword';
 import Drawer from './User/Sidebar/Sidebar.js';
-import { pathIds, loggedInRoutes } from "./User/routes";
+import { loggedInRoutes } from "./User/routes";
 
 
 const routeArray = Object.values(loggedInRoutes);
@@ -25,6 +25,7 @@ const App = () => {
                 <Route
                   path={prop.path}
                   component={prop.component}
+                  key={key}
                   exact={prop.exact || false}
                 />
               );

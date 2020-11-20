@@ -44,8 +44,7 @@ const loggedInRoutes = {
         path: pathRouting.listTrip,
         sidebarName: "PODRÓŻE",
         component: ListTrip,
-        icon: WorkRounded
-        ,
+        icon: WorkRounded,
     },
     [pathIds.addTrip]: {
         path: pathRouting.addTrip,

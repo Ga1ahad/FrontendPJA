@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import { Container, CssBaseline, TextField, Button, Paper, Grid, Typography } from "@material-ui/core";
 
 import * as Yup from 'yup';
@@ -32,15 +32,15 @@ const Login = ({ log }) => {
     }, 500);
   };
 
-  const handleValidation = (values) => {
-    const errors = {};
-    if (!values.email) {
-      errors.email = 'Required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = 'Invalid email address';
-    }
-    return errors;
-  };
+  // const handleValidation = (values) => {
+  //   const errors = {};
+  //   if (!values.email) {
+  //     errors.email = 'Required';
+  //   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+  //     errors.email = 'Invalid email address';
+  //   }
+  //   return errors;
+  // };
 
   console.log(log);
 

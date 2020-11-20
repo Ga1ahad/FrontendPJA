@@ -102,11 +102,11 @@ export default function Sidebar({ routes }) {
         </div>
         <List>
           <ListItem button component={Link} to="/" onClick={handleDrawerClose}>
-            <img src={Logo} className={classes.logo} />
+            <img src={Logo} alt="Clothesy" className={classes.logo} />
           </ListItem>
           {routes.map(({ path, sidebarName, ...prop }, index) => {
             return (
-              <ListItem button to={path} component={Link} onClick={handleDrawerClose}>
+              <ListItem button to={path} component={Link} onClick={handleDrawerClose} key={index} >
                 <ListItemIcon>
                   <prop.icon />
                 </ListItemIcon>
