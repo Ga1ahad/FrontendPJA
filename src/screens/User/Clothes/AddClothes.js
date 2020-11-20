@@ -1,10 +1,9 @@
 import React from 'react'
 import { Grid, Button, Paper, TextField, InputLabel, MenuItem, FormControl, Select, IconButton } from '@material-ui/core';
-import { Link } from "react-router-dom";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import * as Yup from 'yup';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import '../../index.css';
 
 const tags = [

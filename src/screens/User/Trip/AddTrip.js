@@ -4,17 +4,21 @@ import { Formik, Form, } from 'formik';
 
 import '../../index.css'
 import * as Yup from 'yup';
+import axios from 'axios';
+import { number } from 'prop-types';
 
 const AddTripSchema = Yup.object().shape({
     tripName: Yup.string().min(2, 'Too Short!').max(255, 'Too Long!').required('Required'),
-    start: Yup.string().required('Required'),
-    end: Yup.string().required('Required'),
+    startTrip: Yup.string().required('Required'),
+    endTrip: Yup.string().required('Required'),
     city: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+    zipCode: Yup.string().min(2, 'Too Short!').max(10, 'Too Long!').required('Required'),
     country: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
 });
 const AddTrip = () => {
     const handleSubmit = (values, { setSubmitting }) => {
-        console.log('TODO: handle submit');
+        console.log(values)
+        axios.post('http://localhost:59131/api/users/1/Trip', values)
         setTimeout(() => {
             setSubmitting(false);
         }, 500);
@@ -24,7 +28,7 @@ const AddTrip = () => {
             <Paper className="paper" >
                 <h2>PLANOWANIE PODRÓŻY</h2>
                 <Formik
-                    initialValues={{ tripName: '', start: '', end: '', city: '', country: '', }}
+                    initialValues={{ tripName: '', startTrip: '', endTrip: '', city: '', zipCode: number, country: '', }}
                     onSubmit={handleSubmit}
                     validationSchema={AddTripSchema}
                 >
@@ -46,28 +50,28 @@ const AddTrip = () => {
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                         type="date"
-                                        name="start"
+                                        name="startTrip"
                                         label="Początek"
                                         onChange={handleChange}
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
                                         helperText={
-                                            errors.start && touched.start ? errors.start : null
+                                            errors.startTrip && touched.startTrip ? errors.startTrip : null
                                         }
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
                                         type="date"
-                                        name="end"
+                                        name="endTrip"
                                         label="Koniec"
                                         onChange={handleChange}
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
                                         helperText={
-                                            errors.end && touched.end ? errors.end : null
+                                            errors.endTrip && touched.endTrip ? errors.endTrip : null
                                         }
                                     />
                                 </Grid>
@@ -80,6 +84,19 @@ const AddTrip = () => {
                                         onChange={handleChange}
                                         helperText={
                                             errors.city && touched.city ? errors.city : null
+                                        }
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        id="zipCode"
+                                        name="zipCode"
+                                        type="number"
+                                        label="Kod pocztowy"
+                                        fullWidth
+                                        onChange={handleChange}
+                                        helperText={
+                                            errors.zipCode && touched.zipCode ? errors.zipCode : null
                                         }
                                     />
                                 </Grid>
