@@ -47,9 +47,9 @@ const AddClothes = ({ log }) => {
                   label="Name"
                   onChange={handleChange}
                   fullWidth
-                  helperText={
-                    errors.clothName && touched.clothName ? errors.clothName : null
-                  }
+                // helperText={
+                //   errors.clothName && touched.clothName ? errors.clothName : null
+                // }
                 />
               </Grid>
               <Grid item xs={12}>
@@ -72,9 +72,9 @@ const AddClothes = ({ log }) => {
                   options={tags}
                   getOptionLabel={(option) => option.title}
                   filterSelectedOptions
-                  helperText={
-                    errors.purpose && touched.purpose ? errors.purpose : null
-                  }
+                  // helperText={
+                  //   errors.purpose && touched.purpose ? errors.purpose : null
+                  // }
                   renderInput={(params) => (
                     <TextField
                       {...params}
@@ -82,9 +82,9 @@ const AddClothes = ({ log }) => {
                       variant="outlined"
                       label="Purpose"
                       placeholder="Choose tags for cloth"
-                      helperText={
-                        errors.purpose && touched.purpose ? errors.purpose : null
-                      }
+                    // helperText={
+                    //   errors.purpose && touched.purpose ? errors.purpose : null
+                    // }
                     />
                   )}
                 />
