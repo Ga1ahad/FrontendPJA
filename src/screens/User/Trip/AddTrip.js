@@ -18,7 +18,7 @@ const AddTripSchema = Yup.object().shape({
 const AddTrip = () => {
     const handleSubmit = (values, { setSubmitting }) => {
         console.log(values)
-        axios.post('http://localhost:59131/api/users/1/Trip', values)
+        axios.post('http://localhost:59131/api/Trip', values)
         setTimeout(() => {
             setSubmitting(false);
         }, 500);

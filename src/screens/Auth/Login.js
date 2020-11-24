@@ -69,9 +69,9 @@ const Login = ({ log }) => {
                     variant="outlined"
                     onChange={handleChange}
                     autoComplete="email"
-                    helperText={
-                      errors.email && touched.email ? errors.email : null
-                    }
+                  // helperText={
+                  //   errors.email && touched.email ? errors.email : null
+                  // }
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -82,9 +82,9 @@ const Login = ({ log }) => {
                     fullWidth
                     variant="outlined"
                     onChange={handleChange}
-                    helperText={
-                      errors.password && touched.password ? errors.password : null
-                    }
+                  // helperText={
+                  //   errors.password && touched.password ? errors.password : null
+                  // }
                   />
                 </Grid>
                 <Grid item xs={12}>
