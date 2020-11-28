@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { Formik, Form } from 'formik';
 import { Container, CssBaseline, TextField, Button, Paper, Grid, Typography } from "@material-ui/core";
-
+import Logo from '../../assets/icons/clothesy.png';
 import * as Yup from 'yup';
 
 const LoginSchema = Yup.object().shape({
@@ -21,6 +21,10 @@ const useStyles = makeStyles(theme => ({
   form: {
     marginTop: theme.spacing(3)
   },
+  logo: {
+    width: 300,
+    margin: 'auto'
+  }
 }));
 
 const Login = ({ log }) => {
@@ -49,7 +53,7 @@ const Login = ({ log }) => {
     <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} >
         <Typography component="h1" variant="h5">
-          Sign in
+          <img src={Logo} alt="Clothesy" className={classes.logo} />
         </Typography>
         <CssBaseline />
         <Formik
