@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Fab } from '@material-ui/core/styles';
+import { makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Fab } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import './index.css';
 
