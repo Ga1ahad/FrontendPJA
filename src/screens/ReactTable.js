@@ -61,6 +61,9 @@ const ReactTable = (props) => {
                                                 </TableCell>
                                             );
                                         })}
+                                        <IconButton aria-label="delete" color="secondary" className="tool">
+                                            <DeleteIcon />
+                                        </IconButton>
                                         <IconButton aria-label="edit" color="primary" className="tool">
                                             <EditIcon />
                                         </IconButton>
