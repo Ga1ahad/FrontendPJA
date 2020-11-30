@@ -46,12 +46,15 @@ const ReactTable = (props) => {
                                     >
                                         {column.label}
                                     </TableCell>
-                                ))}
+                                ))}<TableCell align="center">
+                                    Edit
+                                </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
                                 return (
+
                                     <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                                         {columns.map((column) => {
                                             const value = row[column.id];
@@ -61,12 +64,14 @@ const ReactTable = (props) => {
                                                 </TableCell>
                                             );
                                         })}
-                                        <IconButton aria-label="delete" color="secondary" className="tool">
-                                            <DeleteIcon />
-                                        </IconButton>
-                                        <IconButton aria-label="edit" color="primary" className="tool">
-                                            <EditIcon />
-                                        </IconButton>
+                                        <TableCell>
+                                            <IconButton aria-label="delete" color="secondary" className="tool">
+                                                <DeleteIcon />
+                                            </IconButton>
+                                            <IconButton aria-label="edit" color="primary" className="tool">
+                                                <EditIcon />
+                                            </IconButton>
+                                        </TableCell>
                                     </TableRow>
                                 );
                             })}
