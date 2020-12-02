@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
+import { IconButton } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -10,6 +11,9 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import axios from 'axios';
 import './index.css';
 
 const useStyles = makeStyles({
@@ -19,7 +23,7 @@ const useStyles = makeStyles({
 });
 
 const ReactTable = (props) => {
-    const { columns, rows, siteName } = props;
+    const { columns, rows, siteName, url, id_name } = props;
 
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
@@ -33,6 +37,13 @@ const ReactTable = (props) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+    const removeData = (id) => {
+        axios.delete('http://localhost:59131/api/' + url + '/' + id).then(res => {
+            window.location.reload();
+        })
+    }
+
+
     return (
         <div>
             <Paper className="paper">
@@ -53,6 +64,9 @@ const ReactTable = (props) => {
                                         {column.label}
                                     </TableCell>
                                 ))}
+                                <TableCell align="center">
+                                    Akcje
+                                </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -64,9 +78,18 @@ const ReactTable = (props) => {
                                             return (
                                                 <TableCell key={column.id} align={column.align}>
                                                     {column.format && typeof value === 'number' ? column.format(value) : value}
+                                                    {row[id_name]}
                                                 </TableCell>
                                             );
                                         })}
+                                        <TableCell>
+                                            <IconButton>
+                                                <EditIcon />
+                                            </IconButton>
+                                            <IconButton onClick={() => removeData(row[id_name])}>
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        </TableCell>
                                     </TableRow>
                                 );
                             })}
