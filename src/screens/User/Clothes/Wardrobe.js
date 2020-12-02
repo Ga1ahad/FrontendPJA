@@ -29,11 +29,11 @@ const columns = [
 function createData(address, name, type, tags, add_date) {
   return { address, name, type, tags, add_date };
 }
-const siteName = 'WARDROBE'
-
+const siteName = 'Szafa'
+const id_name = 'idWardrobe'
 const Wardrobe = () => {
   return (
-    <ReactTable siteName={siteName} columns={columns} rows={rows} />
+    <ReactTable siteName={siteName} columns={columns} rows={rows} id_name={id_name} />
   );
 };
 

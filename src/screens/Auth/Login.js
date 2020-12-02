@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { Formik, Form } from 'formik';
 import { Container, CssBaseline, TextField, Button, Paper, Grid, Typography } from "@material-ui/core";
-
+import AuthService from "../Auth/services/auth.service";
 import * as Yup from 'yup';
 
 const LoginSchema = Yup.object().shape({
@@ -23,10 +23,24 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Login = ({ log }) => {
+const Login = (log) => {
   const classes = useStyles();
   const handleSubmit = (values, { setSubmitting }) => {
-    console.log('TODO: handle submit');
+    AuthService.login(values.email, values.password).then(
+      () => {
+        log.history.push("/home");
+        window.location.reload();
+      },
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+      }
+    );
     setTimeout(() => {
       setSubmitting(false);
     }, 500);
@@ -41,9 +55,6 @@ const Login = ({ log }) => {
   //   }
   //   return errors;
   // };
-
-  console.log(log);
-
   return (
 
     <Container component="main" maxWidth="xs">
