@@ -21,7 +21,7 @@ const columns = [
 function createData(name, start, end, city_country, add_date) {
     return { name, start, end, city_country, add_date };
 }
-const siteName = 'PODRÓŻE'
+const siteName = 'TRIP'
 
 export default class FetchSuitcase extends React.Component {
 
@@ -32,7 +32,7 @@ export default class FetchSuitcase extends React.Component {
     constructor() {
         super();
         api.get('/').then(res => {
-            // console.log(res.data)
+            console.log(res.data)
             this.setState({ trips: res.data })
         })
     }
