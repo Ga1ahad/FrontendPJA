@@ -1,10 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import ReactTable from '../../ReactTable';
-import axios from 'axios';
-
-const api = axios.create({
-    baseURL: 'http://localhost:59131/api/Trip'
-})
+import UserService from "../../Auth/services/user.service"
 
 const columns = [
     { id: 'tripName', label: 'Nazwa' },
@@ -13,28 +9,34 @@ const columns = [
     { id: 'city', label: 'Miejsce' },
     { id: '', label: 'Data dodania' },
 ];
-
 const siteName = 'PODRÓŻE'
 const url = 'trip'
 const id_name = 'idTrip'
 
-export default class FetchSuitcase extends React.Component {
+const ListTrip = () => {
+    const [content, setContent] = useState([]);
+    useEffect(() => {
+        UserService.getTrips().then(
+            (response) => {
+                setContent(response.data);
+            },
+            (error) => {
+                const _content =
+                    (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                    error.message ||
+                    error.toString();
 
-    state = {
-        trips: []
-    }
+                setContent(_content);
 
-    constructor() {
-        super();
-        api.get('/').then(res => {
-            this.setState({ trips: res.data })
-        })
-    }
+            }
+        );
+    },
+        []);
+    return (
+        <ReactTable siteName={siteName} columns={columns} rows={content} url={url} id_name={id_name} />
+    );
+};
 
-    render() {
-        return (
-            <ReactTable siteName={siteName} columns={columns} rows={this.state.trips} url={url} id_name={id_name} />
-        )
-    }
-
-}
+export default ListTrip;
