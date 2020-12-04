@@ -9,7 +9,6 @@ const columns = [
     { id: 'city', label: 'Miejsce' },
     { id: '', label: 'Data dodania' },
 ];
-
 const siteName = 'PODRÓŻE'
 const url = 'trip'
 const id_name = 'idTrip'
