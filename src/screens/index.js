@@ -1,24 +1,36 @@
 import './index.css';
-import React, { Suspense } from 'react';
+import React, { Suspense, useState, useEffect } from "react";
 import { Router, Route, Redirect, Switch } from 'react-router-dom';
 import { Provider, history } from './utils/storage/store';
 // import Admin from './Admin/routes';
 import Login from './Auth/Login';
+import Register from './Auth/register';
 import UpsertPassword from './Auth/UpsertPassword';
 import Drawer from './User/Sidebar/Sidebar.js';
 import { loggedInRoutes } from "./User/routes";
 
+import AuthService from "./Auth/services/auth.service";
 
-const routeArray = Object.values(loggedInRoutes);
 const App = () => {
+  const routeArray = Object.values(loggedInRoutes);
+  const [currentUser, setCurrentUser] = useState(undefined);
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+
+    if (user) {
+      setCurrentUser(user);
+    }
+  }, []);
   return (
     <Provider>
       <Router history={history}>
         <Suspense fallback="loading">
-          <Drawer routes={routeArray} />
+          {currentUser && (
+            <Drawer routes={routeArray} />
+          )}
           <Route path="/" exact render={() => <Redirect to="/login" />} />
           <Route path="/login" component={Login} />
-          <Route path={['/reset-password', '/register']} component={UpsertPassword} />
+          <Route path="/register" component={Register} />
           <Switch>
             {routeArray.map((prop, key) => {
               return (

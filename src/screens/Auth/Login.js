@@ -28,7 +28,7 @@ const Login = (log) => {
   const handleSubmit = (values, { setSubmitting }) => {
     AuthService.login(values.email, values.password).then(
       () => {
-        log.history.push("/home");
+        log.history.push("/trip/list");
         window.location.reload();
       },
       (error) => {
@@ -117,4 +117,4 @@ const Login = (log) => {
   );
 };
 
-export default withStyles(useStyles)(Login);
+export default Login;
