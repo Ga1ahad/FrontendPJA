@@ -18,6 +18,7 @@ const ListTrip = () => {
     useEffect(() => {
         UserService.getTrips().then(
             (response) => {
+                console.log(response)
                 setContent(response.data);
             },
             (error) => {
@@ -28,7 +29,7 @@ const ListTrip = () => {
                     error.message ||
                     error.toString();
 
-                setContent(_content);
+                // setContent(_content);
 
             }
         );
