@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactTable from '../../ReactTable';
+import ReactTable from '../../reactTable';
 
 const rows = [
   createData(

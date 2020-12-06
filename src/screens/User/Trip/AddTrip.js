@@ -4,8 +4,9 @@ import { Formik, Form, } from 'formik';
 
 import '../../index.css'
 import * as Yup from 'yup';
-import axios from 'axios';
 import { number } from 'prop-types';
+import UserService from "../../Auth/services/user.service"
+
 
 const AddTripSchema = Yup.object().shape({
     tripName: Yup.string().min(2, 'Too Short!').max(255, 'Too Long!').required('Required'),
@@ -15,10 +16,23 @@ const AddTripSchema = Yup.object().shape({
     zipCode: Yup.string().min(2, 'Too Short!').max(10, 'Too Long!').required('Required'),
     country: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
 });
-const AddTrip = () => {
+const AddTrip = (log) => {
     const handleSubmit = (values, { setSubmitting }) => {
-        console.log(values)
-        axios.post('http://localhost:59131/api/Trip', values)
+        UserService.postTrips(values).then(
+            () => {
+                log.history.push("/trip/list");
+                window.location.reload();
+            },
+            (error) => {
+                const resMessage =
+                    (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+
+            }
+        );
         setTimeout(() => {
             setSubmitting(false);
         }, 500);
