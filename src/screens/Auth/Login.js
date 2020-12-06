@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { Formik, Form } from 'formik';
 import { Container, CssBaseline, TextField, Button, Paper, Grid, Typography } from "@material-ui/core";
 import AuthService from "../Auth/services/auth.service";

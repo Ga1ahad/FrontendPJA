@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ReactTable from '../../ReactTable';
+import ReactTable from '../../reactTable';
 import UserService from "../../Auth/services/user.service"
 
 const columns = [
