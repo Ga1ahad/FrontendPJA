@@ -1,8 +1,8 @@
-import Wardrobe from "./Clothes/Wardrobe.js";
-import AddClothes from './Clothes/AddClothes.js';
-import AddTrip from './Trip/AddTrip.js';
-import ListTrip from './Trip/ListTrip.js';
-import TodaySet from './Sets/TodaysSet.js';
+import Wardrobe from "./Clothes/wardrobe.js";
+import AddClothes from './Clothes/addClothes.js';
+import AddTrip from './Trip/addTrip.js';
+import ListTrip from './Trip/listTrip.js';
+import TodaySet from './Sets/todaysSet.js';
 import { WorkRounded, CalendarTodayRounded, AddRounded, TodayRounded, CollectionsRounded } from '@material-ui/icons';
 
 const pathIds = {
