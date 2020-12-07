@@ -55,7 +55,7 @@ const ReactTable = (props) => {
                                         {column.label}
                                     </TableCell>
                                 ))}
-                                <TableCell align="center">
+                                <TableCell align="left">
                                     Akcje
                                 </TableCell>
                             </TableRow>
@@ -69,7 +69,6 @@ const ReactTable = (props) => {
                                             return (
                                                 <TableCell key={column.id} align={column.align}>
                                                     {column.format && typeof value === 'number' ? column.format(value) : value}
-                                                    {row[id_name]}
                                                 </TableCell>
                                             );
                                         })}
