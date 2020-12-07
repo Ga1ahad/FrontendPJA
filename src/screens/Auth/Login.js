@@ -4,6 +4,7 @@ import { Formik, Form } from 'formik';
 import { Container, CssBaseline, TextField, Button, Paper, Grid, Typography } from "@material-ui/core";
 import AuthService from "../Auth/services/auth.service";
 import * as Yup from 'yup';
+import Logo from '../../assets/images/clothesy.png';
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -59,9 +60,10 @@ const Login = (log) => {
 
     <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} >
-        <Typography component="h1" variant="h5">
+        <img src={Logo} alt="Clothesy" className={classes.logo} />
+        {/* <Typography component="h1" variant="h5">
           Sign in
-        </Typography>
+        </Typography> */}
         <CssBaseline />
         <Formik
           initialValues={{ email: '', password: '' }}
