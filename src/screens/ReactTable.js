@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Paper, Fab } from '@material-ui/core';
+import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Paper, Fab, Link } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
@@ -33,9 +33,11 @@ const ReactTable = (props) => {
         <div>
             <Paper className="paper">
                 <h2>{siteName}</h2>
-                <Fab color="primary" className="tool">
-                    <AddIcon />
-                </Fab>
+                <a href={"/" + url + "/add/"}>
+                    <Fab color="primary" className="tool">
+                        <AddIcon></AddIcon>
+                    </Fab>
+                </a>
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
@@ -67,7 +69,6 @@ const ReactTable = (props) => {
                                             );
                                         })}
                                         <TableCell>
-
                                             <a href={"/" + url + "/edit/" + row[id_name]}>
                                                 <IconButton>
                                                     <EditIcon />
