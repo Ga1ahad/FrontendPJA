@@ -1,26 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Grid, Button, Paper, TextField } from '@material-ui/core';
-import { Formik, Form, } from 'formik';
-
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 import '../../index.css'
 import * as Yup from 'yup';
 import { number } from 'prop-types';
 import UserService from "../../Auth/services/user.service"
 
+function EditTrip({ history, match }) {
+    const { id } = match.params;
 
-const AddTripSchema = Yup.object().shape({
-    tripName: Yup.string().min(2, 'Too Short!').max(255, 'Too Long!').required('Required'),
-    startTrip: Yup.string().required('Required'),
-    endTrip: Yup.string().required('Required'),
-    city: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-    zipCode: Yup.number().min(2, 'Too Short!').required('Required'),
-    country: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-});
-const AddTrip = (log) => {
+    const EditTripSchema = Yup.object().shape({
+        tripName: Yup.string().min(2, 'Too Short!').max(255, 'Too Long!').required('Required'),
+        startTrip: Yup.string().required('Required'),
+        endTrip: Yup.string().required('Required'),
+        city: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+        zipCode: Yup.string().min(2, 'Too Short!').max(10, 'Too Long!').required('Required'),
+        country: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+    });
+
     const handleSubmit = (values, { setSubmitting }) => {
-        UserService.postTrips(values).then(
+        UserService.updateTrip(id, values).then(
             () => {
-                log.history.push("/trip/list");
+                history.push("/trip/list/" + values);
                 window.location.reload();
             },
             (error) => {
@@ -30,21 +31,21 @@ const AddTrip = (log) => {
                         error.response.data.message) ||
                     error.message ||
                     error.toString();
-
             }
         );
         setTimeout(() => {
             setSubmitting(false);
         }, 500);
     };
+
     return (
         <div >
             <Paper className="paper" >
-                <h2>PLANOWANIE PODRÓŻY</h2>
+                <h2>EDYTOWANIE PODRÓŻY</h2>
                 <Formik
-                    initialValues={{ tripName: '', startTrip: '', endTrip: '', city: '', zipCode: number, country: '', }}
+                    initialValues={{ tripName: 'elo', startTrip: '', endTrip: '', city: '', zipCode: number, country: '', }}
                     onSubmit={handleSubmit}
-                    validationSchema={AddTripSchema}
+                    validationSchema={EditTripSchema}
                 >
                     {({ errors, handleChange, touched }) => (
                         <Form>
@@ -142,7 +143,7 @@ const AddTrip = (log) => {
                 </Formik>
             </Paper>
         </div>
-    )
+    );
 }
 
-export default AddTrip;
+export default EditTrip;

@@ -4,8 +4,8 @@ import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import axios from 'axios';
 import './index.css';
+import userService from './Auth/services/user.service';
 
 const useStyles = makeStyles({
     container: {
@@ -28,12 +28,6 @@ const ReactTable = (props) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-    const removeData = (id) => {
-        axios.delete('http://localhost:59131/api/' + url + '/' + id).then(res => {
-            window.location.reload();
-        })
-    }
-
 
     return (
         <div>
@@ -73,10 +67,13 @@ const ReactTable = (props) => {
                                             );
                                         })}
                                         <TableCell>
-                                            <IconButton>
-                                                <EditIcon />
-                                            </IconButton>
-                                            <IconButton onClick={() => removeData(row[id_name])}>
+
+                                            <a href={"/" + url + "/edit/" + row[id_name]}>
+                                                <IconButton>
+                                                    <EditIcon />
+                                                </IconButton>
+                                            </a>
+                                            <IconButton onClick={() => userService.removeTrip(row[id_name])}>
                                                 <DeleteIcon />
                                             </IconButton>
                                         </TableCell>

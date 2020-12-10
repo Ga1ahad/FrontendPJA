@@ -1,8 +1,10 @@
-import Wardrobe from "./Clothes/Wardrobe.js";
-import AddClothes from './Clothes/AddClothes.js';
-import AddTrip from './Trip/AddTrip.js';
-import ListTrip from './Trip/ListTrip.js';
-import TodaySet from './Sets/TodaysSet.js';
+import Wardrobe from "./Clothes/wardrobe.js";
+import AddClothes from './Clothes/addClothes.js';
+import AddTrip from './Trip/addTrip.js';
+import EditTrip from './Trip/editTrip.js';
+import ListTrip from './Trip/listTrip.js';
+import TodaySet from './Sets/todaysSet.js';
+
 import { WorkRounded, CalendarTodayRounded, AddRounded, TodayRounded, CollectionsRounded } from '@material-ui/icons';
 
 const pathIds = {
@@ -11,6 +13,7 @@ const pathIds = {
     addCloth: "add-cloth",
     listTrip: "list-trip",
     addTrip: "add-trip",
+    editTrip: "edit-trip",
 };
 
 const pathRouting = {
@@ -19,6 +22,7 @@ const pathRouting = {
     addCloth: "/clothes/add",
     listTrip: "/trip/list",
     addTrip: "/trip/add",
+    editTrip: "/trip/edit/:id",
 };
 
 const loggedInRoutes = {
@@ -50,6 +54,12 @@ const loggedInRoutes = {
         path: pathRouting.addTrip,
         sidebarName: "PLANOWANIE PODRÓŻY",
         component: AddTrip,
+        icon: CalendarTodayRounded,
+    },
+    [pathIds.editTrip]: {
+        path: pathRouting.editTrip,
+        sidebarName: "EDYTOWANIE PODRÓŻY",
+        component: EditTrip,
         icon: CalendarTodayRounded,
     },
 };
