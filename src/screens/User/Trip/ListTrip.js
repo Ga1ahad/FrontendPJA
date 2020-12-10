@@ -6,8 +6,10 @@ const columns = [
     { id: 'tripName', label: 'Nazwa' },
     { id: 'startTrip', label: 'Początek' },
     { id: 'endTrip', label: 'Koniec' },
-    { id: 'city', label: 'Miejsce' },
-    { id: '', label: 'Data dodania' },
+    { id: 'city', label: 'Miasto' },
+    { id: 'country', label: 'Państwo' },
+    //There is no Data dodania in the database so it should be done on frontend
+    //{ id: '', label: 'Data dodania' },
 ];
 const siteName = 'PODRÓŻE'
 const url = 'trip'
@@ -35,6 +37,13 @@ const ListTrip = () => {
         );
     },
         []);
+
+    //Formatting Date for Start and End of a Trip
+    content.forEach(e => {
+        e.startTrip = new Date(e.startTrip).toDateString();
+        e.endTrip = new Date(e.endTrip).toDateString();
+    })
+
     return (
         <ReactTable siteName={siteName} columns={columns} rows={content} url={url} id_name={id_name} />
     );

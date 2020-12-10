@@ -43,7 +43,7 @@ function EditTrip({ history, match }) {
             <Paper className="paper" >
                 <h2>EDYTOWANIE PODRÓŻY</h2>
                 <Formik
-                    initialValues={{ tripName: 'elo', startTrip: '', endTrip: '', city: '', zipCode: number, country: '', }}
+                    initialValues={{ tripName: '', startTrip: '', endTrip: '', city: '', zipCode: number, country: '', }}
                     onSubmit={handleSubmit}
                     validationSchema={EditTripSchema}
                 >
