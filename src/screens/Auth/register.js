@@ -4,6 +4,8 @@ import { Formik, Form } from 'formik';
 import { Container, CssBaseline, TextField, Button, Paper, Grid, Typography } from "@material-ui/core";
 import AuthService from "../Auth/services/auth.service";
 import * as Yup from 'yup';
+import Logo from '../../assets/images/clothesy.png';
+
 
 const RegisterSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email').required('Required'),
@@ -59,9 +61,10 @@ const Register = (log) => {
 
         <Container component="main" maxWidth="xs">
             <Paper className={classes.paper} >
-                <Typography component="h1" variant="h5">
-                    Sign up
-        </Typography>
+                <img src={Logo} alt="Clothesy" className={classes.logo} />
+                <Typography component="" variant="h5" color='secondary'>
+                    REGISTER
+                </Typography>
                 <CssBaseline />
                 <Formik
                     initialValues={{ email: '', password: '' }}
@@ -103,17 +106,22 @@ const Register = (log) => {
                                         type="submit"
                                         fullWidth
                                         variant="contained"
-                                        color="primary"
+                                        color="secondary"
                                     >
                                         Sign up
                                     </Button>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <a href="/login">
+                                        <Typography align='center' variant='subtitle1'>Already have an account? Sign in!</Typography>
+                                    </a>
                                 </Grid>
                             </Grid>
                         </Form>
                     )}
                 </Formik>
             </Paper>
-        </Container>
+        </Container >
     );
 };
 

@@ -61,9 +61,9 @@ const Login = (log) => {
     <Container component="main" maxWidth="xs">
       <Paper className={classes.paper} >
         <img src={Logo} alt="Clothesy" className={classes.logo} />
-        {/* <Typography component="h1" variant="h5">
-          Sign in
-        </Typography> */}
+        <Typography component="h1" variant="h5">
+          SIGN IN
+        </Typography>
         <CssBaseline />
         <Formik
           initialValues={{ email: '', password: '' }}
@@ -110,12 +110,17 @@ const Login = (log) => {
                     Sign in
                 </Button>
                 </Grid>
+                <Grid item xs={12}>
+                  <a href="/register">
+                    <Typography align='center' variant='subtitle1'>Don't have an account? Register now!</Typography>
+                  </a>
+                </Grid>
               </Grid>
             </Form>
           )}
         </Formik>
       </Paper>
-    </Container>
+    </Container >
   );
 };
 
