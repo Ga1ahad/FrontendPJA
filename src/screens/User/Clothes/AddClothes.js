@@ -1,16 +1,40 @@
 import React from 'react'
-import { Grid, Button, Paper, TextField, InputLabel, MenuItem, FormControl, Select, IconButton } from '@material-ui/core';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import { Grid, Button, Paper, TextField, InputLabel, MenuItem, FormControl, IconButton } from '@material-ui/core';
 import * as Yup from 'yup';
-import { Formik, Form } from 'formik';
+import {
+  Autocomplete,
+  ToggleButtonGroup,
+  AutocompleteRenderInputParams,
+} from 'formik-material-ui-lab';
+import { Formik, Form, Field } from "formik";
+import { Select } from "material-ui-formik-components/Select";
+import MuiTextField from '@material-ui/core/TextField';
 import '../../index.css';
+const ClotingTypes = [
+  {
+    idType: 1,
+    type_name: "T-Shirt"
+  },
+  {
+    idType: 2,
+    type_name: "Shirt"
+  },
+  {
+    idType: 3,
+    type_name: "Jacket"
+  },
+  {
+    idType: 4,
+    type_name: "Jeans"
+  }
+];
+
 
 const tags = [
-  { title: 'Windy day' },
-  { title: 'Rainy day' },
-  { title: 'Sunny' },
-  { title: 'For colder days' },
+  { idTag: 1, name: 'Windy day' },
+  { idTag: 2, name: 'Rainy day' },
+  { idTag: 3, name: 'Sunny' },
+  { idTag: 4, name: 'For colder days' },
 ];
 
 const AddClothSchema = Yup.object().shape({
@@ -19,8 +43,12 @@ const AddClothSchema = Yup.object().shape({
 });
 
 const AddClothes = ({ log }) => {
+  const [file, setFile] = React.useState(null)
+  const fileHandler = (e) => {
+    setFile(e.target.files[0])
+  }
   const handleSubmit = (values, { setSubmitting }) => {
-    console.log('TODO: handle submit');
+    console.log(values);
     setTimeout(() => {
       setSubmitting(false);
     }, 500);
@@ -30,15 +58,18 @@ const AddClothes = ({ log }) => {
     <Paper className="paper">
       <h2>DODAWANIE UBRAŃ</h2>
       <Formik
-        initialValues={{ clothName: '', purpose: '' }}
+        initialValues={{ file: null, clothName: '', ClotingType: ClotingTypes[0].idType, tags: [] }}
         onSubmit={handleSubmit}
-        validationSchema={AddClothSchema}
+      // validationSchema={AddClothSchema}
       >
         {({ errors, handleChange, touched }) => (
           <Form>
             <Grid container spacing={3} direction="column" justify="space-between">
               <Grid container justify="center">
-                <IconButton><AddAPhotoIcon className="addIcon" /></IconButton>
+                <div>
+                  <img src={file ? URL.createObjectURL(file) : null} alt={file ? file.name : null} />
+                  <input type="file" onChange={fileHandler} />
+                </div>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -53,38 +84,31 @@ const AddClothes = ({ log }) => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <FormControl className="formControl">
-                  <InputLabel id="demo-simple-select-label">Type</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                  >
-                    <MenuItem value={'Shirt'}>T-Shirt</MenuItem>
-                    <MenuItem value={'Shirt'}>Shirt</MenuItem>
-                    <MenuItem value={'Pants'}>Pants</MenuItem>
-                  </Select>
-                </FormControl>
+                <Field
+                  name="ClotingType"
+                  label="Type of clothing"
+                  options={ClotingTypes.map((entry) => ({
+                    value: entry.idType,
+                    label: entry.type_name
+                  }))}
+                  component={Select}
+                />
               </Grid>
               <Grid item xs={12}>
-                <Autocomplete
+                <Field
+                  name="tags"
                   multiple
-                  id="tags-outlined"
+                  component={Autocomplete}
                   options={tags}
-                  getOptionLabel={(option) => option.title}
-                  filterSelectedOptions
-                  // helperText={
-                  //   errors.purpose && touched.purpose ? errors.purpose : null
-                  // }
+                  getOptionLabel={(option) => option.name}
+                  style={{ width: 300 }}
                   renderInput={(params) => (
-                    <TextField
+                    <MuiTextField
                       {...params}
-                      name="purpose"
+                      error={touched['tags'] && !!errors['tags']}
+                      helperText={touched['tags'] && errors['tags']}
+                      label="Tags"
                       variant="outlined"
-                      label="Purpose"
-                      placeholder="Choose tags for cloth"
-                    // helperText={
-                    //   errors.purpose && touched.purpose ? errors.purpose : null
-                    // }
                     />
                   )}
                 />
