@@ -114,3 +114,11 @@ h2 {
   margin-top: 65px;
 }
 
+.logoutButton {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  text-decoration:none;
+  text-size-adjust: inherit;
+}
+
