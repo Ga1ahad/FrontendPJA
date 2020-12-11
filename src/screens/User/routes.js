@@ -40,7 +40,7 @@ const loggedInRoutes = {
     },
     [pathIds.addCloth]: {
         path: pathRouting.addCloth,
-        sidebarName: "DODAJ UBRNIE",
+        sidebarName: "DODAJ UBRANIE",
         component: AddClothes,
         icon: AddRounded,
     },

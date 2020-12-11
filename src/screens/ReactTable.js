@@ -9,7 +9,7 @@ import userService from './Auth/services/user.service';
 
 const useStyles = makeStyles({
     container: {
-        maxHeight: 440,
+        // maxHeight: '100%',
     },
 });
 
@@ -38,7 +38,7 @@ const ReactTable = (props) => {
                         <AddIcon></AddIcon>
                     </Fab>
                 </a>
-                <TableContainer className={classes.container}>
+                <TableContainer className={classes.container, 'reactTable'}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
@@ -64,7 +64,14 @@ const ReactTable = (props) => {
                                             const value = row[column.id];
                                             return (
                                                 <TableCell key={column.id} align={column.align}>
-                                                    {column.format && typeof value === 'number' ? column.format(value) : value}
+                                                    {
+                                                        column.format && typeof value === 'number' ?
+                                                            column.format(value)
+                                                            : value.startsWith('http') ?
+                                                                <img className='clothPhoto' src={value} />
+                                                                : //else
+                                                                value
+                                                    }
                                                 </TableCell>
                                             );
                                         })}
