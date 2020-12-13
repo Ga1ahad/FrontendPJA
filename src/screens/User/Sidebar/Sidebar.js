@@ -5,8 +5,6 @@ import { ChevronLeft, ChevronRight, Menu } from '@material-ui/icons';
 import { Link } from "react-router-dom";
 import { List, ListItem, ListItemText, ListItemIcon, Drawer, AppBar, IconButton, Toolbar, Button } from '@material-ui/core';
 import Logo from '../../../assets/images/clothesy.png';
-import authService from "../../Auth/services/auth.service"
-import Typography from "material-ui/styles/typography";
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 
 const drawerWidth = 240;
@@ -118,12 +116,12 @@ export default function Sidebar({ routes }) {
             );
           })}
         </List>
-        <a href={"/login"} className='logoutButton'>
+        {/* <a href={"/login"} className='logoutButton'>
           <Button onClick={authService.logout()}>
             <PowerSettingsNewIcon />
              Logout
           </Button>
-        </a>
+        </a> */}
       </Drawer>
     </div>
   );

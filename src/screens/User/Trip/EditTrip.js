@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import { Grid, Button, Paper, TextField } from '@material-ui/core';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import '../../index.css'
 import * as Yup from 'yup';
-import { number } from 'prop-types';
-import UserService from "../../Auth/services/user.service"
+import UserService from "../../Auth/services/user.service";
 
 function EditTrip({ history, match }) {
     const { id } = match.params;
+    const [content, setContent] = useState([]);
+
+    useEffect(() => {
+        UserService.getTrip(id).then(
+            (response) => {
+                console.log(response)
+                setContent(response.data);
+            }
+        );
+    },
+        []);
 
     const EditTripSchema = Yup.object().shape({
         tripName: Yup.string().min(2, 'Too Short!').max(255, 'Too Long!').required('Required'),
@@ -39,110 +49,120 @@ function EditTrip({ history, match }) {
     };
 
     return (
-        <div >
-            <Paper className="paper" >
-                <h2>EDYTOWANIE PODRÓŻY</h2>
-                <Formik
-                    initialValues={{ tripName: '', startTrip: '', endTrip: '', city: '', zipCode: number, country: '', }}
+        <Paper className="paper" >
+            <h2>EDYTOWANIE PODRÓŻY</h2>
+            <div>
+                {content.tripName && <Formik
+                    initialValues={content}
                     onSubmit={handleSubmit}
                     validationSchema={EditTripSchema}
                 >
-                    {({ errors, handleChange, touched }) => (
-                        <Form>
-                            <Grid alignItems="stretch" container spacing={5} >
-                                <Grid item xs={12}  >
-                                    <TextField
-                                        id="tripName"
-                                        name="tripName"
-                                        label="Nazwa podróży"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        helperText={
-                                            errors.tripName && touched.tripName ? errors.tripName : null
-                                        }
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        type="date"
-                                        name="startTrip"
-                                        label="Początek"
-                                        onChange={handleChange}
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        helperText={
-                                            errors.startTrip && touched.startTrip ? errors.startTrip : null
-                                        }
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        type="date"
-                                        name="endTrip"
-                                        label="Koniec"
-                                        onChange={handleChange}
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        helperText={
-                                            errors.endTrip && touched.endTrip ? errors.endTrip : null
-                                        }
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        id="city"
-                                        name="city"
-                                        label="Miejscowość"
-                                        fullWidth
-                                        onChange={handleChange}
-                                        helperText={
-                                            errors.city && touched.city ? errors.city : null
-                                        }
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        id="zipCode"
-                                        name="zipCode"
-                                        type="number"
-                                        label="Kod pocztowy"
-                                        fullWidth
-                                        onChange={handleChange}
-                                        helperText={
-                                            errors.zipCode && touched.zipCode ? errors.zipCode : null
-                                        }
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6} >
-                                    <TextField
-                                        id="country"
-                                        name="country"
-                                        label="Kraj"
-                                        onChange={handleChange}
-                                        fullWidth
-                                        helperText={
-                                            errors.country && touched.country ? errors.country : null
-                                        }
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Button
-                                        className="btn"
-                                        variant="contained"
-                                        color="primary"
-                                        type="submit"
-                                    >
-                                        Zatwiedź
+                    {({ errors, handleChange, touched, initialValues }) => {
+
+                        return (
+                            <Form>
+                                <Grid alignItems="stretch" container spacing={5} >
+                                    <Grid item xs={12}  >
+                                        <TextField
+                                            id="tripName"
+                                            name="tripName"
+                                            label="Nazwa podróży"
+                                            onChange={handleChange}
+                                            defaultValue={initialValues.tripName}
+                                            fullWidth
+                                            helperText={
+                                                errors.tripName && touched.tripName ? errors.tripName : null
+                                            }
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            type="date"
+                                            name="startTrip"
+                                            label="Początek"
+                                            onChange={handleChange}
+                                            defaultValue={initialValues.startTrip}
+                                            InputLabelProps={{
+                                                shrink: true,
+                                            }}
+                                            helperText={
+                                                errors.startTrip && touched.startTrip ? errors.startTrip : null
+                                            }
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            type="date"
+                                            name="endTrip"
+                                            label="Koniec"
+                                            onChange={handleChange}
+                                            defaultValue={initialValues.endTrip}
+                                            InputLabelProps={{
+                                                shrink: true,
+                                            }}
+                                            helperText={
+                                                errors.endTrip && touched.endTrip ? errors.endTrip : null
+                                            }
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            id="city"
+                                            name="city"
+                                            label="Miejscowość"
+                                            fullWidth
+                                            onChange={handleChange}
+                                            defaultValue={initialValues.city}
+                                            helperText={
+                                                errors.city && touched.city ? errors.city : null
+                                            }
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6}>
+                                        <TextField
+                                            id="zipCode"
+                                            name="zipCode"
+                                            type="number"
+                                            label="Kod pocztowy"
+                                            fullWidth
+                                            onChange={handleChange}
+                                            defaultValue={initialValues.zipCode}
+                                            helperText={
+                                                errors.zipCode && touched.zipCode ? errors.zipCode : null
+                                            }
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} sm={6} >
+                                        <TextField
+                                            id="country"
+                                            name="country"
+                                            label="Kraj"
+                                            onChange={handleChange}
+                                            defaultValue={initialValues.country}
+                                            fullWidth
+                                            helperText={
+                                                errors.country && touched.country ? errors.country : null
+                                            }
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <Button
+                                            className="btn"
+                                            variant="contained"
+                                            color="primary"
+                                            type="submit"
+                                        >
+                                            Zatwiedź
                                     </Button>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </Form>
-                    )}
-                </Formik>
-            </Paper>
-        </div>
+                            </Form>
+                        )
+                    }}
+                </Formik>}
+
+            </div>
+        </Paper>
     );
 }
 
