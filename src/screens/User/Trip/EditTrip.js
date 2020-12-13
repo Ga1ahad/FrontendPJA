@@ -48,6 +48,24 @@ function EditTrip({ history, match }) {
         }, 500);
     };
 
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2)
+            month = '0' + month;
+        if (day.length < 2)
+            day = '0' + day;
+
+        return [year, month, day].join('-');
+    }
+
+    //Formatting date in order to map data to the screen
+    content.startTrip = formatDate(new Date(content.startTrip));
+    content.endTrip = formatDate(new Date(content.endTrip));
+
     return (
         <Paper className="paper" >
             <h2>EDYTOWANIE PODRÓŻY</h2>
