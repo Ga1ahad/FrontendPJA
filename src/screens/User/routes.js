@@ -3,7 +3,7 @@ import AddClothes from './Clothes/addClothes.js';
 import AddTrip from './Trip/addTrip.js';
 import EditTrip from './Trip/editTrip.js';
 import ListTrip from './Trip/listTrip.js';
-import TodaySet from './Sets/todaysSet.js';
+import CreateSet from './Sets/createSet.js';
 
 import { WorkRounded, CalendarTodayRounded, AddRounded, TodayRounded, CollectionsRounded } from '@material-ui/icons';
 
@@ -18,7 +18,7 @@ const pathIds = {
 
 const pathRouting = {
     wardrobe: "/clothes/list",
-    todaySet: "/todaysset",
+    createSet: "/createSet",
     addCloth: "/clothes/add",
     listTrip: "/trip/list",
     addTrip: "/trip/add",
@@ -32,10 +32,10 @@ const loggedInRoutes = {
         component: Wardrobe,
         icon: CollectionsRounded,
     },
-    [pathIds.todaySet]: {
-        path: pathRouting.todaySet,
+    [pathIds.createSet]: {
+        path: pathRouting.createSet,
         sidebarName: "ZESTAW NA DZIŚ",
-        component: TodaySet,
+        component: CreateSet,
         icon: TodayRounded,
     },
     [pathIds.addCloth]: {
