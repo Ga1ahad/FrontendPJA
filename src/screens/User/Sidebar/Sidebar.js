@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { List, ListItem, ListItemText, ListItemIcon, Drawer, AppBar, IconButton, Toolbar, Button } from '@material-ui/core';
 import Logo from '../../../assets/images/clothesy.png';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+import authService from "../../Auth/services/auth.service"
 
 const drawerWidth = 240;
 
