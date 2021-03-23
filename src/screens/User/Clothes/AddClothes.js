@@ -71,7 +71,7 @@ const AddClothes = ({ log }) => {
                   <input type="file" onChange={fileHandler} />
                 </div>
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={6}>
                 <TextField
                   id="clothName"
                   name="clothName"
@@ -83,7 +83,7 @@ const AddClothes = ({ log }) => {
                 // }
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={3}>
                 <Field
                   name="ClotingType"
                   label="Type of clothing"
