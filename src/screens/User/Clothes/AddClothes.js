@@ -75,7 +75,7 @@ const AddClothes = ({ log }) => {
                 <TextField
                   id="clothName"
                   name="clothName"
-                  label="Name"
+                  label="Nazwa"
                   onChange={handleChange}
                   fullWidth
                 // helperText={
@@ -86,7 +86,7 @@ const AddClothes = ({ log }) => {
               <Grid item xs={12}>
                 <Field
                   name="ClotingType"
-                  label="Type of clothing"
+                  label="Typ ubrania"
                   options={ClotingTypes.map((entry) => ({
                     value: entry.idType,
                     label: entry.type_name
@@ -107,7 +107,7 @@ const AddClothes = ({ log }) => {
                       {...params}
                       error={touched['tags'] && !!errors['tags']}
                       helperText={touched['tags'] && errors['tags']}
-                      label="Tags"
+                      label="Tagi"
                       variant="outlined"
                     />
                   )}
@@ -120,7 +120,7 @@ const AddClothes = ({ log }) => {
                   variant="contained"
                   color="primary"
                 >
-                  Add Cloth
+                  Dodaj ubranie
               </Button>
               </Grid>
             </Grid>

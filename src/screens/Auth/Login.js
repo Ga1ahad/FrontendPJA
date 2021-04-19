@@ -62,7 +62,7 @@ const Login = (log) => {
       <Paper className={classes.paper} >
         <img src={Logo} alt="Clothesy" className={classes.logo} />
         <Typography component="h1" variant="h5">
-          SIGN IN
+          Logowanie
         </Typography>
         <CssBaseline />
         <Formik
@@ -91,7 +91,7 @@ const Login = (log) => {
                   <TextField
                     type="password"
                     name="password"
-                    label="Password"
+                    label="Hasło"
                     fullWidth
                     variant="outlined"
                     onChange={handleChange}
@@ -107,12 +107,12 @@ const Login = (log) => {
                     variant="contained"
                     color="primary"
                   >
-                    Sign in
+                    Zaloguj się
                 </Button>
                 </Grid>
                 <Grid item xs={12}>
                   <a href="/register">
-                    <Typography align='center' variant='subtitle1'>Don't have an account? Register now!</Typography>
+                    <Typography align='center' variant='subtitle1'>Utwórz konto</Typography>
                   </a>
                 </Grid>
               </Grid>
