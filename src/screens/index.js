@@ -5,8 +5,8 @@ import { Provider, history } from './utils/storage/store';
 // import Admin from './Admin/routes';
 import Login from './Auth/login';
 import Register from './Auth/register';
-import Drawer from './User/Sidebar/sidebar.js';
-import { loggedInRoutes } from "./User/routes";
+import Drawer from './User/Sidebar/Sidebar.js';
+import { loggedInRoutes } from "./User/Routes";
 
 import AuthService from "./Auth/services/auth.service";
 

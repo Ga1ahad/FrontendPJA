@@ -13,6 +13,8 @@ const useStyles = makeStyles({
     },
 });
 
+
+
 const ReactTable = (props) => {
     const { columns, rows, siteName, url, id_name } = props;
 
@@ -99,6 +101,7 @@ const ReactTable = (props) => {
                     page={page}
                     onChangePage={handleChangePage}
                     onChangeRowsPerPage={handleChangeRowsPerPage}
+                    labelRowsPerPage='Liczba rekordów na stronie:'
                 />
             </Paper>
         </div>

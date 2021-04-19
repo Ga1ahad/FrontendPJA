@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactTable from '../../reactTable';
+import ReactTable from '../../ReactTable';
 
 const rows = [
     createData(
@@ -29,7 +29,7 @@ const columns = [
 function createData(address, name, type, tags, add_date) {
     return { address, name, type, tags, add_date };
 }
-const siteName = 'Todays set'
+const siteName = 'Zestaw na dziś'
 
 const TodaysSet = () => {
     return (
