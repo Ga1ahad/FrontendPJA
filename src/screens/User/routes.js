@@ -34,7 +34,7 @@ const loggedInRoutes = {
     },
     [pathIds.createSet]: {
         path: pathRouting.createSet,
-        sidebarName: "ZESTAW NA DZIŚ",
+        sidebarName: "STWÓRZ SET",
         component: CreateSet,
         icon: TodayRounded,
     },

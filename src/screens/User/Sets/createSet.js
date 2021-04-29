@@ -5,44 +5,51 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { NoEncryption } from '@material-ui/icons';
-import { AutoComplete } from 'material-ui';
+import { Paper } from '@material-ui/core';
+import Component1 from './components/Component1';
+import Component2 from './components/Component2';
+import Component3 from './components/Component3';
+import ReactDOM from 'react-dom';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginTop: '50px',
-
     },
     content: {
         display: 'flex',
         justifyContent: 'center'
-        //width: '100%',
     },
     backButton: {
         marginRight: theme.spacing(1),
     },
     instructions: {
+        display: 'flex',
+        justifyContent: 'center',
         marginTop: theme.spacing(1),
-        marginBottom: theme.spacing(1),
+        marginBottom: theme.spacing(1)
     },
 }));
 
 function getSteps() {
-    return ['Hello', 'Choose destination', 'Choose type of clothes', 'Choose', 'Done'];
+    return ['Hello', 'Choose destination', 'Choose type of clothes'];
 }
+
+//const components = [component1, component2, component3];
 
 function getStepContent(step) {
     switch (step) {
         case 0:
-            return 'Step 1: We are checking the weather for you';
+            return <Component1 />;
         case 1:
-            return 'Step 2: Select the trip you would like to go';
+            return <Component2 />;
+        //return 'Step 2: Select the trip you would like to go';
         case 2:
-            return 'Step 3: Specify types of clothes you would like to bring with you';
+            return <Component3 />;
+        //return 'Step 3: Specify types of clothes you would like to bring with you';
         case 3:
-            return 'Step 4: Specify variety of clothes like colour etc.';
+        //return 'Step 4: Specify variety of clothes like colour etc.';
         case 4:
-            return 'Step 5: We are calculating your set please stand by..';
+        //return 'Step 5: We are calculating your set please stand by..';
         default:
             return 'Unknown step';
     }
@@ -66,38 +73,41 @@ export default function CreateSet() {
     };
 
     return (
-        <div className={classes.root}>
-            <Stepper activeStep={activeStep} alternativeLabel>
-                {steps.map((label) => (
-                    <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
-                    </Step>
-                ))}
-            </Stepper>
-            <div className={classes.content}>
-                {activeStep === steps.length ? (
-                    <div>
-                        <Typography className={classes.instructions}>All steps completed</Typography>
-                        <Button onClick={handleReset}>Reset</Button>
-                    </div>
-                ) : (
-                    <div>
-                        <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-                        <div className={classes.content}>
-                            <Button
-                                disabled={activeStep === 0}
-                                onClick={handleBack}
-                            //className={classes.backButton}
-                            >
-                                Back
-                                </Button>
-                            <Button variant="contained" color="primary" onClick={handleNext}>
-                                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                            </Button>
+        <Paper className="paper">
+            <div className={classes.root}>
+                <Stepper activeStep={activeStep} alternativeLabel>
+                    {steps.map((label) => (
+                        <Step key={label}>
+                            <StepLabel>{label}</StepLabel>
+                        </Step>
+                    ))}
+                </Stepper>
+                <div className={classes.content}>
+                    {activeStep === steps.length ? (
+                        <div>
+                            <Typography className={classes.instructions}>All steps completed</Typography>
+                            <Button onClick={handleReset}>Back to the starting point</Button>
                         </div>
-                    </div>
-                )}
+                    ) : (
+                        <div id='test'>
+                            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+                            <div className={classes.content}>
+                                <Button
+                                    disabled={activeStep === 0}
+                                    onClick={handleBack}
+                                //className={classes.backButton}
+                                >
+                                    Back
+                                </Button>
+                                <Button variant="contained" color="primary" onClick={handleNext}>
+                                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                                </Button>
+                            </div>
+                        </div>
+                    )}
+                </div>
             </div>
-        </div>
+        </Paper>
+
     );
 }
