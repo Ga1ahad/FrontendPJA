@@ -5,8 +5,13 @@ import '../../index.css'
 import * as Yup from 'yup';
 import { number } from 'prop-types';
 import UserService from "../../Auth/services/user.service"
+import authService from "../../Auth/services/auth.service"
 
 function EditTrip({ history, match }) {
+    const isLoggedIn = UserService.isLoggedIn();
+    if (!isLoggedIn) {
+        history.push("/login");
+    }
     const { id } = match.params;
 
     const EditTripSchema = Yup.object().shape({

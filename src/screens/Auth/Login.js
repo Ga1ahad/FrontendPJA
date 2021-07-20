@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Formik, Form } from 'formik';
 import { Container, CssBaseline, TextField, Button, Paper, Grid, Typography } from "@material-ui/core";
-import AuthService from "../Auth/services/auth.service";
+import authService from "../Auth/services/auth.service";
 import * as Yup from 'yup';
 import Logo from '../../assets/images/clothesy.png';
 
@@ -25,9 +25,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Login = (log) => {
+  const isLoggedIn = authService.isLoggedIn();
+  if (isLoggedIn) {
+    log.history.push("/clothes/list");
+  }
   const classes = useStyles();
   const handleSubmit = (values, { setSubmitting }) => {
-    AuthService.login(values.email, values.password).then(
+    authService.login(values.email, values.password).then(
       () => {
         log.history.push("/trip/list");
         window.location.reload();
@@ -108,7 +112,7 @@ const Login = (log) => {
                     color="primary"
                   >
                     Zaloguj się
-                </Button>
+                  </Button>
                 </Grid>
                 <Grid item xs={12}>
                   <a href="/register">

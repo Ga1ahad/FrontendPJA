@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactTable from '../../ReactTable';
 import UserService from "../../Auth/services/user.service"
+import authService from "../../Auth/services/auth.service"
 
 const columns = [
     { id: 'tripName', label: 'Nazwa' },
@@ -15,7 +16,11 @@ const siteName = 'PODRÓŻE'
 const url = 'trip'
 const id_name = 'idTrip'
 
-const ListTrip = () => {
+const ListTrip = (log) => {
+    const isLoggedIn = authService.isLoggedIn();
+    if (!isLoggedIn) {
+        log.history.push("/login");
+    }
     const [content, setContent] = useState([]);
     useEffect(() => {
         UserService.getTrips().then(

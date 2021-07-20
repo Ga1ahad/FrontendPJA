@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactTable from '../../ReactTable';
 import UserService from "../../Auth/services/user.service"
+import authService from "../../Auth/services/auth.service"
 
 const columns = [
   { id: 'url', label: '' },
@@ -15,7 +16,11 @@ const siteName = 'SZAFA'
 const url = 'clothes'
 const id_name = 'idWardrobe'
 
-const Wardrobe = () => {
+const Wardrobe = (log) => {
+  const isLoggedIn = authService.isLoggedIn();
+  if (!isLoggedIn) {
+    log.history.push("/login");
+  }
   const [content, setContent] = useState([]);
   useEffect(() => {
     UserService.getClothes().then(

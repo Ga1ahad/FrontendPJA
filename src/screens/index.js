@@ -8,13 +8,15 @@ import Register from './Auth/register';
 import Drawer from './User/Sidebar/Sidebar.js';
 import { loggedInRoutes } from "./User/Routes";
 
-import AuthService from "./Auth/services/auth.service";
+import authService from "./Auth/services/auth.service";
 
 const App = () => {
+  const isLoggedIn = authService.isLoggedIn();
+
   const routeArray = Object.values(loggedInRoutes);
   const [currentUser, setCurrentUser] = useState(undefined);
   useEffect(() => {
-    const user = AuthService.getCurrentUser();
+    const user = authService.getCurrentUser();
 
     if (user) {
       setCurrentUser(user);

@@ -110,8 +110,6 @@ const ReactTable = (props) => {
                 />
             </Paper>
         </div>
-
     )
 }
-
 export default ReactTable;

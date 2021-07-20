@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactTable from '../../ReactTable';
+import authService from "../../Auth/services/auth.service"
 
 const rows = [
     createData(
@@ -31,7 +32,11 @@ function createData(address, name, type, tags, add_date) {
 }
 const siteName = 'Zestaw na dziś'
 
-const TodaysSet = () => {
+const TodaysSet = (log) => {
+    const isLoggedIn = authService.isLoggedIn();
+    if (!isLoggedIn) {
+        log.history.push("/login");
+    }
     return (
         <ReactTable siteName={siteName} columns={columns} rows={rows} />
     );

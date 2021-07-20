@@ -2,6 +2,8 @@ import React from 'react';
 import { Grid, Button, Paper, TextField, InputLabel, MenuItem, FormControl, Select } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Link } from 'react-router-dom';
+import UserService from "../../Auth/services/user.service"
+import authService from "../../Auth/services/auth.service"
 
 import '../../index.css';
 
@@ -13,6 +15,10 @@ const tags = [
 ];
 
 const EditClothes = () => {
+  const isLoggedIn = UserService.isLoggedIn();
+  if (!isLoggedIn) {
+    history.push("/login");
+  }
   return (
     <Paper className="paper">
       <Grid container spacing={3} direction="column" justify="space-between">
