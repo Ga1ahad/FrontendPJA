@@ -3,7 +3,9 @@ import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:59131/api/";
 const TRIP_URL = "trip";
-const CLOTHING_URL = 'clothes'
+const CLOTHING_URL = 'clothing'
+const TAG_URL = 'tag'
+const TYPE_URL = 'clothingtype'
 
 const getTrips = () => {
     return axios.get(API_URL + TRIP_URL, { headers: authHeader() });
@@ -31,9 +33,8 @@ const getTrip = (id) => {
 const getClothes = () => {
     return axios.get(API_URL + CLOTHING_URL, { headers: authHeader() });
 };
+
 const postClothes = (values) => {
-    // console.log(authHeader())
-    // console.log(values)
     return axios.post(API_URL + CLOTHING_URL, values, { headers: authHeader() })
 };
 
@@ -51,7 +52,17 @@ const getClothing = (id) => {
     return axios.get(API_URL + CLOTHING_URL + '/' + id, { headers: authHeader() })
 }
 
+const getTags = () => {
+    return axios.get(API_URL + TAG_URL);
+};
+
+const getTypes = () => {
+    console.log(axios.get(API_URL + TYPE_URL))
+    return axios.get(API_URL + TYPE_URL);
+};
+
 export default {
+    getTypes,
     getTrips,
     postTrips,
     removeTrip,
@@ -62,4 +73,5 @@ export default {
     removeClothing,
     updateClothing,
     getClothing,
+    getTags
 };

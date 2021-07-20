@@ -63,16 +63,21 @@ const ReactTable = (props) => {
                                 return (
                                     <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                                         {columns.map((column) => {
-                                            const value = row[column.id];
+                                            let value = ''
+                                            if (typeof row[column.id] != 'undefined') {
+                                                value = row[column.id];
+                                            }
                                             return (
+
                                                 <TableCell key={column.id} align={column.align}>
                                                     {
-                                                        column.format && typeof value === 'number' ?
-                                                            column.format(value)
-                                                            : value.startsWith('http') ?
-                                                                <img className='clothPhoto' src={value} />
-                                                                : //else
-                                                                value
+
+                                                        // column.format && typeof value === 'number' ?
+                                                        // column.format(value)
+                                                        value.startsWith('http') ?
+                                                            <img className='clothPhoto' src={value} />
+                                                            : //else
+                                                            value
                                                     }
                                                 </TableCell>
                                             );

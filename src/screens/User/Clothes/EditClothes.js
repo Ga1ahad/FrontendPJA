@@ -9,7 +9,7 @@ const tags = [
   { title: 'Windy day' },
   { title: 'Rainy day' },
   { title: 'Sunny' },
-  { title: 'For colder days' },
+  { title: 'For colder' },
 ];
 
 const EditClothes = () => {
