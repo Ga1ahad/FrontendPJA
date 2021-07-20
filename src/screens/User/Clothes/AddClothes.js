@@ -9,6 +9,7 @@ import { Select } from "material-ui-formik-components/Select";
 import MuiTextField from '@material-ui/core/TextField';
 import '../../index.css';
 import UserService from "../../Auth/services/user.service"
+import authService from "../../Auth/services/auth.service"
 
 const AddClothSchema = Yup.object().shape({
   clothName: Yup.string().min(2, 'Too Short!').max(255, 'Too Long!').required('Required'),
@@ -16,6 +17,10 @@ const AddClothSchema = Yup.object().shape({
 });
 
 const AddClothes = ({ log }) => {
+  const isLoggedIn = authService.isLoggedIn();
+  if (!isLoggedIn) {
+    log.history.push("/login");
+  }
   const [file, setFile] = React.useState(null)
   const [tags, setTags] = useState([]);
   const [ClotingTypes, setTypes] = useState([]);

@@ -1,12 +1,11 @@
 import React from 'react'
 import { Grid, Button, Paper, TextField } from '@material-ui/core';
 import { Formik, Form, } from 'formik';
-
 import '../../index.css'
 import * as Yup from 'yup';
 import { number } from 'prop-types';
 import UserService from "../../Auth/services/user.service"
-
+import authService from "../../Auth/services/auth.service"
 
 const AddTripSchema = Yup.object().shape({
     tripName: Yup.string().min(2, 'Too Short!').max(255, 'Too Long!').required('Required'),
@@ -17,6 +16,11 @@ const AddTripSchema = Yup.object().shape({
     country: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
 });
 const AddTrip = (log) => {
+    const isLoggedIn = authService.isLoggedIn();
+    if (!isLoggedIn) {
+        log.history.push("/login");
+    }
+    console.log('aaaaaaaaaa')
     const handleSubmit = (values, { setSubmitting }) => {
         UserService.postTrips(values).then(
             () => {
@@ -38,6 +42,7 @@ const AddTrip = (log) => {
         }, 500);
     };
     return (
+
         <div >
             <Paper className="paper" >
                 <h2>PLANOWANIE PODRÓŻY</h2>
