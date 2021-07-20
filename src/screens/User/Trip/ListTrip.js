@@ -20,7 +20,6 @@ const ListTrip = () => {
     useEffect(() => {
         UserService.getTrips().then(
             (response) => {
-                console.log(response)
                 setContent(response.data);
             },
             (error) => {
@@ -30,14 +29,11 @@ const ListTrip = () => {
                         error.response.data.message) ||
                     error.message ||
                     error.toString();
-
                 // setContent(_content);
-
             }
         );
     },
         []);
-
     //Formatting Date for Start and End of a Trip
     content.forEach(e => {
         e.startTrip = new Date(e.startTrip).toDateString();

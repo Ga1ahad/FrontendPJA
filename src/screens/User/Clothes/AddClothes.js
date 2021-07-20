@@ -1,41 +1,14 @@
-import React from 'react'
-import { Grid, Button, Paper, TextField, InputLabel, MenuItem, FormControl, IconButton } from '@material-ui/core';
+import React, { useState, useEffect } from "react";
+import { Grid, Button, Paper, TextField } from '@material-ui/core';
 import * as Yup from 'yup';
 import {
   Autocomplete,
-  ToggleButtonGroup,
-  AutocompleteRenderInputParams,
 } from 'formik-material-ui-lab';
 import { Formik, Form, Field } from "formik";
 import { Select } from "material-ui-formik-components/Select";
 import MuiTextField from '@material-ui/core/TextField';
 import '../../index.css';
-const ClotingTypes = [
-  {
-    idType: 1,
-    type_name: "T-Shirt"
-  },
-  {
-    idType: 2,
-    type_name: "Shirt"
-  },
-  {
-    idType: 3,
-    type_name: "Jacket"
-  },
-  {
-    idType: 4,
-    type_name: "Jeans"
-  }
-];
-
-
-const tags = [
-  { idTag: 1, name: 'Windy day' },
-  { idTag: 2, name: 'Rainy day' },
-  { idTag: 3, name: 'Sunny' },
-  { idTag: 4, name: 'For colder days' },
-];
+import UserService from "../../Auth/services/user.service"
 
 const AddClothSchema = Yup.object().shape({
   clothName: Yup.string().min(2, 'Too Short!').max(255, 'Too Long!').required('Required'),
@@ -44,11 +17,65 @@ const AddClothSchema = Yup.object().shape({
 
 const AddClothes = ({ log }) => {
   const [file, setFile] = React.useState(null)
+  const [tags, setTags] = useState([]);
+  const [ClotingTypes, setTypes] = useState([]);
+  console.log(tags)
   const fileHandler = (e) => {
     setFile(e.target.files[0])
   }
+  React.useEffect(() => {
+    UserService.getTags().then(
+      (response) => {
+        setTags(response.data);
+      },
+      (error) => {
+        const _content =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        // setContent(_content);
+      }
+    );
+    UserService.getTypes().then(
+      (response) => {
+        setTypes(response.data);
+      },
+      (error) => {
+        const _content =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        // setContent(_content);
+      }
+    );
+  },
+    []);
   const handleSubmit = (values, { setSubmitting }) => {
-    console.log(values);
+    var formData1 = new FormData();
+    formData1.append("image", file);
+    formData1.append("name", values.clothName)
+    formData1.append("idClothingType", values.ClotingType)
+    formData1.append("tags", values.tags.map(a => a.idTag).toString())
+    UserService.postClothes(formData1).then(
+      () => {
+        // log.history.push("/clothes/list");
+        window.location = '/clothes/list';
+      },
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+      }
+    );
+    console.log();
     setTimeout(() => {
       setSubmitting(false);
     }, 500);
@@ -58,7 +85,7 @@ const AddClothes = ({ log }) => {
     <Paper className="paper">
       <h2>DODAWANIE UBRAŃ</h2>
       <Formik
-        initialValues={{ file: null, clothName: '', ClotingType: ClotingTypes[0].idType, tags: [] }}
+        initialValues={{ file: null, clothName: '', ClotingType: '', tags: [] }}
         onSubmit={handleSubmit}
       // validationSchema={AddClothSchema}
       >
@@ -88,8 +115,8 @@ const AddClothes = ({ log }) => {
                   name="ClotingType"
                   label="Typ ubrania"
                   options={ClotingTypes.map((entry) => ({
-                    value: entry.idType,
-                    label: entry.type_name
+                    value: entry.idClothingType,
+                    label: entry.name
                   }))}
                   component={Select}
                 />
@@ -100,7 +127,7 @@ const AddClothes = ({ log }) => {
                   multiple
                   component={Autocomplete}
                   options={tags}
-                  getOptionLabel={(option) => option.name}
+                  getOptionLabel={(option) => option.tagName}
                   style={{ width: 300 }}
                   renderInput={(params) => (
                     <MuiTextField
@@ -121,7 +148,7 @@ const AddClothes = ({ log }) => {
                   color="primary"
                 >
                   Dodaj ubranie
-              </Button>
+                </Button>
               </Grid>
             </Grid>
           </Form>
