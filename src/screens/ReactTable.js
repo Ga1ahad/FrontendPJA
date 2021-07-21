@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Paper, Fab, Link } from '@material-ui/core';
+import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Paper, Fab } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
@@ -12,8 +12,6 @@ const useStyles = makeStyles({
         // maxHeight: '100%',
     },
 });
-
-
 
 const ReactTable = (props) => {
     const { columns, rows, siteName, url, id_name } = props;
