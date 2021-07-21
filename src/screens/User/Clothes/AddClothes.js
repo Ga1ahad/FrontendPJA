@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Grid, Button, Paper, TextField } from '@material-ui/core';
 import * as Yup from 'yup';
 import {
@@ -11,10 +11,10 @@ import '../../index.css';
 import UserService from "../../Auth/services/user.service"
 import authService from "../../Auth/services/auth.service"
 
-const AddClothSchema = Yup.object().shape({
-  clothName: Yup.string().min(2, 'Too Short!').max(255, 'Too Long!').required('Required'),
-  purpose: Yup.string().required('Required'),
-});
+// const AddClothSchema = Yup.object().shape({
+//   clothName: Yup.string().min(2, 'Too Short!').max(255, 'Too Long!').required('Required'),
+//   purpose: Yup.string().required('Required'),
+// });
 
 const AddClothes = ({ log }) => {
   const isLoggedIn = authService.isLoggedIn();
@@ -34,12 +34,12 @@ const AddClothes = ({ log }) => {
         setTags(response.data);
       },
       (error) => {
-        const _content =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
+        // const _content =
+        //   (error.response &&
+        //     error.response.data &&
+        //     error.response.data.message) ||
+        //   error.message ||
+        //   error.toString();
         // setContent(_content);
       }
     );
@@ -48,13 +48,13 @@ const AddClothes = ({ log }) => {
         setTypes(response.data);
       },
       (error) => {
-        const _content =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-        // setContent(_content);
+        // const _content =
+        //   (error.response &&
+        //     error.response.data &&
+        //     error.response.data.message) ||
+        //   error.message ||
+        //   error.toString();
+        // // setContent(_content);
       }
     );
   },
@@ -71,13 +71,12 @@ const AddClothes = ({ log }) => {
         window.location = '/clothes/list';
       },
       (error) => {
-        const resMessage =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
-
+        // const resMessage =
+        // (error.response &&
+        //   error.response.data &&
+        //   error.response.data.message) ||
+        // error.message ||
+        // error.toString();
       }
     );
     console.log();

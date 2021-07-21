@@ -15,7 +15,18 @@ const tags = [
 ];
 
 const EditClothes = () => {
+  const { id } = match.params;
+  const [content, setContent] = useState([]);
   const isLoggedIn = UserService.isLoggedIn();
+  useEffect(() => {
+    UserService.getTrip(id).then(
+      (response) => {
+        console.log(response)
+        setContent(response.data);
+      }
+    );
+  },
+    []);
   if (!isLoggedIn) {
     history.push("/login");
   }

@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { Grid, Button, Paper, TextField } from '@material-ui/core';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { Formik, Form } from 'formik';
 import '../../index.css'
 import * as Yup from 'yup';
-import { number } from 'prop-types';
-import UserService from "../../Auth/services/user.service"
+import UserService from "../../Auth/services/user.service";
 import authService from "../../Auth/services/auth.service"
 
 function EditTrip({ history, match }) {
-    const isLoggedIn = UserService.isLoggedIn();
+    const isLoggedIn = authService.isLoggedIn();
+    const { id } = match.params;
+    const [content, setContent] = useState([]);
     if (!isLoggedIn) {
         history.push("/login");
     }
-    const { id } = match.params;
-
+    useEffect(() => {
+        UserService.getTrip(id).then(
+            (response) => {
+                console.log(response)
+                setContent(response.data);
+            }
+        );
+    },
+        []);
     const EditTripSchema = Yup.object().shape({
         tripName: Yup.string().min(2, 'Too Short!').max(255, 'Too Long!').required('Required'),
         startTrip: Yup.string().required('Required'),
@@ -44,15 +52,15 @@ function EditTrip({ history, match }) {
     };
 
     return (
-        <div >
-            <Paper className="paper" >
-                <h2>EDYTOWANIE PODRÓŻY</h2>
-                <Formik
-                    initialValues={{ tripName: '', startTrip: '', endTrip: '', city: '', zipCode: number, country: '', }}
-                    onSubmit={handleSubmit}
-                    validationSchema={EditTripSchema}
-                >
-                    {({ errors, handleChange, touched }) => (
+        <Paper className="paper" >
+            <h2>EDYTOWANIE PODRÓŻY</h2>
+            {content.tripName && <Formik
+                initialValues={content}
+                onSubmit={handleSubmit}
+                validationSchema={EditTripSchema}
+            >
+                {({ errors, handleChange, touched, initialValues }) => {
+                    return (
                         <Form>
                             <Grid alignItems="stretch" container spacing={5} >
                                 <Grid item xs={12}  >
@@ -61,6 +69,7 @@ function EditTrip({ history, match }) {
                                         name="tripName"
                                         label="Nazwa podróży"
                                         onChange={handleChange}
+                                        defaultValue={initialValues.tripName}
                                         fullWidth
                                         helperText={
                                             errors.tripName && touched.tripName ? errors.tripName : null
@@ -73,6 +82,7 @@ function EditTrip({ history, match }) {
                                         name="startTrip"
                                         label="Początek"
                                         onChange={handleChange}
+                                        defaultValue={initialValues.startTrip}
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
@@ -87,6 +97,7 @@ function EditTrip({ history, match }) {
                                         name="endTrip"
                                         label="Koniec"
                                         onChange={handleChange}
+                                        defaultValue={initialValues.endTrip}
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
@@ -102,6 +113,7 @@ function EditTrip({ history, match }) {
                                         label="Miejscowość"
                                         fullWidth
                                         onChange={handleChange}
+                                        defaultValue={initialValues.city}
                                         helperText={
                                             errors.city && touched.city ? errors.city : null
                                         }
@@ -115,6 +127,7 @@ function EditTrip({ history, match }) {
                                         label="Kod pocztowy"
                                         fullWidth
                                         onChange={handleChange}
+                                        defaultValue={initialValues.zipCode}
                                         helperText={
                                             errors.zipCode && touched.zipCode ? errors.zipCode : null
                                         }
@@ -126,6 +139,7 @@ function EditTrip({ history, match }) {
                                         name="country"
                                         label="Kraj"
                                         onChange={handleChange}
+                                        defaultValue={initialValues.country}
                                         fullWidth
                                         helperText={
                                             errors.country && touched.country ? errors.country : null
@@ -144,11 +158,10 @@ function EditTrip({ history, match }) {
                                 </Grid>
                             </Grid>
                         </Form>
-                    )}
-                </Formik>
-            </Paper>
-        </div>
+                    )
+                }}
+            </Formik>}
+        </Paper>
     );
 }
-
 export default EditTrip;

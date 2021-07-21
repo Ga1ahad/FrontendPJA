@@ -4,6 +4,9 @@ import AddTrip from './Trip/AddTrip.js';
 import EditTrip from './Trip/EditTrip.js';
 import ListTrip from './Trip/ListTrip.js';
 import TodaySet from './Sets/TodaysSet.js';
+import Login from '../Auth/login';
+import Register from '../Auth/register';
+
 
 import { WorkRounded, CalendarTodayRounded, AddRounded, TodayRounded, CollectionsRounded } from '@material-ui/icons';
 
@@ -14,6 +17,8 @@ const pathIds = {
     listTrip: "list-trip",
     addTrip: "add-trip",
     editTrip: "edit-trip",
+    login: "sign-in",
+    register: "sign-up",
 };
 
 const pathRouting = {
@@ -23,6 +28,8 @@ const pathRouting = {
     listTrip: "/trip/list",
     addTrip: "/trip/add",
     editTrip: "/trip/edit/:id",
+    login: "login",
+    register: "register",
 };
 
 const loggedInRoutes = {
@@ -64,4 +71,21 @@ const loggedInRoutes = {
     },
 };
 
-export { loggedInRoutes, pathIds, pathRouting };
+const notLoggedInRoutes = {
+    [pathIds.wardrobe]: {
+        path: pathRouting.login,
+        sidebarName: "Zaloguj",
+        component: Login,
+        icon: CollectionsRounded,
+    },
+    [pathIds.todaySet]: {
+        path: pathRouting.register,
+        sidebarName: "Zarejestruj się",
+        component: Register,
+        icon: TodayRounded,
+    },
+
+};
+
+
+export { loggedInRoutes, pathIds, pathRouting, notLoggedInRoutes };

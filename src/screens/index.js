@@ -1,5 +1,5 @@
 import './index.css';
-import React, { Suspense, useState, useEffect } from "react";
+import React, { Suspense } from "react";
 import { Router, Route, Redirect, Switch } from 'react-router-dom';
 import { Provider, history } from './utils/storage/store';
 // import Admin from './Admin/routes';
@@ -12,21 +12,13 @@ import authService from "./Auth/services/auth.service";
 
 const App = () => {
   const isLoggedIn = authService.isLoggedIn();
-
-  const routeArray = Object.values(loggedInRoutes);
-  const [currentUser, setCurrentUser] = useState(undefined);
-  useEffect(() => {
-    const user = authService.getCurrentUser();
-
-    if (user) {
-      setCurrentUser(user);
-    }
-  }, []);
+  var routeArray = [];
+  routeArray = Object.values(loggedInRoutes);
   return (
     <Provider>
       <Router history={history}>
         <Suspense fallback="loading">
-          {currentUser && (
+          {isLoggedIn && (
             <Drawer routes={routeArray} />
           )}
           <Route path="/" exact render={() => <Redirect to="/login" />} />
