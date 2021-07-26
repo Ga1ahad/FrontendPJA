@@ -16,8 +16,8 @@ function EditTrip({ history, match }) {
     useEffect(() => {
         UserService.getTrip(id).then(
             (response) => {
-                console.log(response)
                 setContent(response.data);
+                console.log(response.data)
             }
         );
     },
@@ -54,6 +54,7 @@ function EditTrip({ history, match }) {
     return (
         <Paper className="paper" >
             <h2>EDYTOWANIE PODRÓŻY</h2>
+            {content.tripName}
             {content.tripName && <Formik
                 initialValues={content}
                 onSubmit={handleSubmit}

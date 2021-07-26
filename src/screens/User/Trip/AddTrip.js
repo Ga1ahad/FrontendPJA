@@ -20,7 +20,6 @@ const AddTrip = (log) => {
     if (!isLoggedIn) {
         log.history.push("/login");
     }
-    console.log('aaaaaaaaaa')
     const handleSubmit = (values, { setSubmitting }) => {
         UserService.postTrips(values).then(
             () => {
