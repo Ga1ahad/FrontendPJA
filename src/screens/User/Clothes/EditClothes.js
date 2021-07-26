@@ -1,85 +1,153 @@
-import React from 'react';
-import { Grid, Button, Paper, TextField, InputLabel, MenuItem, FormControl, Select } from '@material-ui/core';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Grid, Button, Paper, TextField } from '@material-ui/core';
+import * as Yup from 'yup';
+import {
+  Autocomplete,
+} from 'formik-material-ui-lab';
+import { Formik, Form, Field } from "formik";
+import { Select } from "material-ui-formik-components/Select";
+import MuiTextField from '@material-ui/core/TextField';
+import '../../index.css';
 import UserService from "../../Auth/services/user.service"
 import authService from "../../Auth/services/auth.service"
 
-import '../../index.css';
+// const EditClothesSchema = Yup.object().shape({
+//   clothName: Yup.string().min(2, 'Too Short!').max(255, 'Too Long!').required('Required'),
+//   purpose: Yup.string().required('Required'),
+// });
 
-const tags = [
-  { title: 'Windy day' },
-  { title: 'Rainy day' },
-  { title: 'Sunny' },
-  { title: 'For colder' },
-];
-
-const EditClothes = () => {
+const EditClothes = ({ history, match }) => {
+  const isLoggedIn = authService.isLoggedIn();
   const { id } = match.params;
+  if (!isLoggedIn) {
+    history.push("/login");
+  }
+  const [file, setFile] = React.useState(null)
+  const [tags, setTags] = useState([]);
+  const [ClotingTypes, setTypes] = useState([]);
   const [content, setContent] = useState([]);
-  const isLoggedIn = UserService.isLoggedIn();
-  useEffect(() => {
-    UserService.getTrip(id).then(
+  const fileHandler = (e) => {
+    setFile(e.target.files[0])
+  }
+  React.useEffect(() => {
+    UserService.getTags().then(
       (response) => {
-        console.log(response)
-        setContent(response.data);
+        setTags(response.data);
+      },
+      (error) => {
+      }
+    );
+    UserService.getTypes().then(
+      (response) => {
+        setTypes(response.data);
+      },
+      (error) => {
+      }
+    );
+    UserService.getClothing(id).then(
+      (response) => {
+        setContent(response.data[0]);
+        console.log(response.data[0])
       }
     );
   },
     []);
-  if (!isLoggedIn) {
-    history.push("/login");
-  }
+  const handleSubmit = (values, { setSubmitting }) => {
+    var formData1 = new FormData();
+    formData1.append("image", file);
+    formData1.append("name", values.clothName)
+    formData1.append("idClothingType", values.ClotingType)
+    formData1.append("tags", values.tags.map(a => a.idTag).toString())
+    UserService.postClothes(formData1).then(
+      () => {
+        // log.history.push("/clothes/list");
+        window.location = '/clothes/list';
+      },
+      (error) => {
+      }
+    );
+    console.log();
+    setTimeout(() => {
+      setSubmitting(false);
+    }, 500);
+  };
+
   return (
     <Paper className="paper">
-      <Grid container spacing={3} direction="column" justify="space-between">
-        <Grid container justify="center">
-          <img className="pic" src="https://source.unsplash.com/9qd0iQ8otbU/600x799" alt="pic" />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField id="clothName" name="clothName" label="Name" fullWidth />
-        </Grid>
-        <Grid item xs={12}>
-          <FormControl className="formControl">
-            <InputLabel id="demo-simple-select-label">Type</InputLabel>
-            <Select labelId="demo-simple-select-label" id="demo-simple-select">
-              <MenuItem value={'Shirt'}>T-Shirt</MenuItem>
-              <MenuItem value={'Shirt'}>Shirt</MenuItem>
-              <MenuItem value={'Pants'}>Pants</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid item xs={12}>
-          <Autocomplete
-            multiple
-            id="tags-outlined"
-            options={tags}
-            getOptionLabel={(option) => option.title}
-            filterSelectedOptions
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="outlined"
-                label="Purpose"
-                placeholder="Choose tags for cloth"
-              />
-            )}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Button
-            className="btn"
-            variant="contained"
-            color="primary"
-            component={Link}
-            to="/clothes/list"
-          >
-            Add Cloth
-          </Button>
-        </Grid>
-      </Grid>
+      <h2>EDYTOWANIE UBRAŃ</h2>
+      {content.name && <Formik
+        initialValues={{ file: null, clothName: content.name, ClotingType: '', tags: [] }}
+        onSubmit={handleSubmit}
+      // validationSchema={EditClothesSchema}
+      >
+        {({ errors, handleChange, touched, initialValues }) => (
+          <Form>
+            <Grid container spacing={3} direction="column" justify="space-between">
+              <Grid container justify="center">
+                <div>
+                  <img src={file ? URL.createObjectURL(file) : null} alt={file ? file.name : null} />
+                  <input type="file" onChange={fileHandler} />
+                </div>
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  id="clothName"
+                  name="clothName"
+                  label="Nazwa"
+                  onChange={handleChange}
+                  defaultValue={initialValues.clothName}
+                  fullWidth
+                // helperText={
+                //   errors.clothName && touched.clothName ? errors.clothName : null
+                // }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Field
+                  name="ClotingType"
+                  label="Typ ubrania"
+                  options={ClotingTypes.map((entry) => ({
+                    value: entry.idClothingType,
+                    label: entry.name
+                  }))}
+                  component={Select}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Field
+                  name="tags"
+                  multiple
+                  component={Autocomplete}
+                  options={tags}
+                  getOptionLabel={(option) => option.tagName}
+                  style={{ width: 300 }}
+                  renderInput={(params) => (
+                    <MuiTextField
+                      {...params}
+                      error={touched['tags'] && !!errors['tags']}
+                      helperText={touched['tags'] && errors['tags']}
+                      label="Tagi"
+                      variant="outlined"
+                    />
+                  )}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Button
+                  type="submit"
+                  className="btn"
+                  variant="contained"
+                  color="primary"
+                >
+                  Dodaj ubranie
+                </Button>
+              </Grid>
+            </Grid>
+          </Form>
+        )}
+      </Formik>}
     </Paper>
-  );
-};
+  )
+}
 
 export default EditClothes;

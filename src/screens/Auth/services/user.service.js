@@ -11,8 +11,6 @@ const getTrips = () => {
     return axios.get(API_URL + TRIP_URL, { headers: authHeader() });
 };
 const postTrips = (values) => {
-    // console.log(authHeader())
-    // console.log(values)
     return axios.post(API_URL + TRIP_URL, values, { headers: authHeader() })
 };
 
@@ -57,7 +55,6 @@ const getTags = () => {
 };
 
 const getTypes = () => {
-    console.log(axios.get(API_URL + TYPE_URL))
     return axios.get(API_URL + TYPE_URL);
 };
 

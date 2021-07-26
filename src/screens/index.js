@@ -6,20 +6,22 @@ import { Provider, history } from './utils/storage/store';
 import Login from './Auth/login';
 import Register from './Auth/register';
 import Drawer from './User/Sidebar/Sidebar.js';
-import { loggedInRoutes } from "./User/Routes";
+import { loggedInRoutes, navbarRoutes } from "./User/Routes";
 
 import authService from "./Auth/services/auth.service";
 
 const App = () => {
   const isLoggedIn = authService.isLoggedIn();
   var routeArray = [];
+  var navbarArray = [];
   routeArray = Object.values(loggedInRoutes);
+  navbarArray = Object.values(navbarRoutes);
   return (
     <Provider>
       <Router history={history}>
         <Suspense fallback="loading">
           {isLoggedIn && (
-            <Drawer routes={routeArray} />
+            <Drawer routes={navbarArray} />
           )}
           <Route path="/" exact render={() => <Redirect to="/login" />} />
           <Route path="/login" component={Login} />

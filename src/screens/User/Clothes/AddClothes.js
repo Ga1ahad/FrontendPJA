@@ -24,7 +24,6 @@ const AddClothes = ({ log }) => {
   const [file, setFile] = React.useState(null)
   const [tags, setTags] = useState([]);
   const [ClotingTypes, setTypes] = useState([]);
-  console.log(tags)
   const fileHandler = (e) => {
     setFile(e.target.files[0])
   }

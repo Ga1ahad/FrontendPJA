@@ -12,9 +12,8 @@ const columns = [
 ];
 
 const siteName = 'SZAFA'
-
 const url = 'clothes'
-const id_name = 'idWardrobe'
+const id_name = 'idClothing'
 
 const Wardrobe = (log) => {
   const isLoggedIn = authService.isLoggedIn();
