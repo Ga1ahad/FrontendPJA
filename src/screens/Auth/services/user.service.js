@@ -14,8 +14,8 @@ const postTrips = (values) => {
     return axios.post(API_URL + TRIP_URL, values, { headers: authHeader() })
 };
 
-const removeTrip = (id) => {
-    axios.delete(API_URL + TRIP_URL + '/' + id, { headers: authHeader() }).then(() => {
+const remove = (id, URL) => {
+    axios.delete(API_URL + URL + '/' + id, { headers: authHeader() }).then(() => {
         window.location.reload();
     })
 }
@@ -35,12 +35,6 @@ const getClothes = () => {
 const postClothes = (values) => {
     return axios.post(API_URL + CLOTHING_URL, values, { headers: authHeader() })
 };
-
-const removeClothing = (id) => {
-    axios.delete(API_URL + CLOTHING_URL + '/' + id, { headers: authHeader() }).then(() => {
-        window.location.reload();
-    })
-}
 
 const updateClothing = (id, data) => {
     return axios.put(API_URL + CLOTHING_URL + '/' + id, data, { headers: authHeader() })
@@ -62,12 +56,11 @@ export default {
     getTypes,
     getTrips,
     postTrips,
-    removeTrip,
+    remove,
     updateTrip,
     getTrip,
     getClothes,
     postClothes,
-    removeClothing,
     updateClothing,
     getClothing,
     getTags
