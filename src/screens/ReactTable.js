@@ -69,7 +69,6 @@ const ReactTable = (props) => {
 
                                                 <TableCell key={column.id} align={column.align}>
                                                     {
-
                                                         // column.format && typeof value === 'number' ?
                                                         // column.format(value)
                                                         value.startsWith('http') ?
@@ -86,7 +85,7 @@ const ReactTable = (props) => {
                                                     <EditIcon />
                                                 </IconButton>
                                             </a>
-                                            <IconButton onClick={() => userService.removeTrip(row[id_name])}>
+                                            <IconButton onClick={() => userService.remove(row[id_name], url)}>
                                                 <DeleteIcon />
                                             </IconButton>
                                         </TableCell>

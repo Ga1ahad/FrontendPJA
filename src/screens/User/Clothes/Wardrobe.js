@@ -12,7 +12,7 @@ const columns = [
 ];
 
 const siteName = 'SZAFA'
-const url = 'clothes'
+const url = 'clothing'
 const id_name = 'idClothing'
 
 const Wardrobe = (log) => {
