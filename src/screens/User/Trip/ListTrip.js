@@ -15,6 +15,7 @@ const columns = [
 const siteName = 'PODRÓŻE'
 const url = 'trip'
 const id_name = 'idTrip'
+const site_url = 'trip'
 
 const ListTrip = (log) => {
     const isLoggedIn = authService.isLoggedIn();
@@ -46,7 +47,7 @@ const ListTrip = (log) => {
     })
 
     return (
-        <ReactTable siteName={siteName} columns={columns} rows={content} url={url} id_name={id_name} />
+        <ReactTable siteName={siteName} columns={columns} rows={content} url={url} id_name={id_name} site_url={site_url} />
     );
 };
 

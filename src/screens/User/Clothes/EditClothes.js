@@ -54,11 +54,10 @@ const EditClothes = ({ history, match }) => {
     []);
   const handleSubmit = (values, { setSubmitting }) => {
     var formData1 = new FormData();
-    formData1.append("image", file);
     formData1.append("name", values.clothName)
     formData1.append("idClothingType", values.ClotingType)
     formData1.append("tags", values.tags.map(a => a.idTag).toString())
-    UserService.postClothes(formData1).then(
+    UserService.updateClothing(id, formData1).then(
       () => {
         // log.history.push("/clothes/list");
         window.location = '/clothes/list';
