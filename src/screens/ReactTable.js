@@ -14,7 +14,7 @@ const useStyles = makeStyles({
 });
 
 const ReactTable = (props) => {
-    const { columns, rows, siteName, url, id_name } = props;
+    const { columns, rows, siteName, url, id_name, site_url } = props;
 
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
@@ -80,7 +80,7 @@ const ReactTable = (props) => {
                                             );
                                         })}
                                         <TableCell>
-                                            <a href={"/" + url + "/edit/" + row[id_name]}>
+                                            <a href={"/" + site_url + "/edit/" + row[id_name]}>
                                                 <IconButton>
                                                     <EditIcon />
                                                 </IconButton>

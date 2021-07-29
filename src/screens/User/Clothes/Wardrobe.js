@@ -14,6 +14,7 @@ const columns = [
 const siteName = 'SZAFA'
 const url = 'clothing'
 const id_name = 'idClothing'
+const site_url = 'clothes'
 
 const Wardrobe = (log) => {
   const isLoggedIn = authService.isLoggedIn();
@@ -40,7 +41,7 @@ const Wardrobe = (log) => {
     []);
 
   return (
-    <ReactTable siteName={siteName} columns={columns} rows={content} url={url} id_name={id_name} />
+    <ReactTable siteName={siteName} columns={columns} rows={content} url={url} id_name={id_name} site_url={site_url} />
   );
 };
 
