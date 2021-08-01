@@ -11,10 +11,9 @@ import '../../index.css';
 import UserService from "../../Auth/services/user.service"
 import authService from "../../Auth/services/auth.service"
 
-// const EditClothesSchema = Yup.object().shape({
-//   clothName: Yup.string().min(2, 'Too Short!').max(255, 'Too Long!').required('Required'),
-//   purpose: Yup.string().required('Required'),
-// });
+const EditClothesSchema = Yup.object().shape({
+  clothName: Yup.string().min(2, 'Too Short!').max(255, 'Too Long!').required('Required'),
+});
 
 const EditClothes = ({ history, match }) => {
   const isLoggedIn = authService.isLoggedIn();
@@ -22,36 +21,41 @@ const EditClothes = ({ history, match }) => {
   if (!isLoggedIn) {
     history.push("/login");
   }
-  const [file, setFile] = React.useState(null)
   const [tags, setTags] = useState([]);
-  const [ClotingTypes, setTypes] = useState([]);
+  const [clotingTypes, setTypes] = useState([]);
   const [content, setContent] = useState([]);
-  const fileHandler = (e) => {
-    setFile(e.target.files[0])
-  }
   React.useEffect(() => {
-    UserService.getTags().then(
-      (response) => {
-        setTags(response.data);
-      },
-      (error) => {
-      }
-    );
     UserService.getTypes().then(
       (response) => {
         setTypes(response.data);
-      },
-      (error) => {
       }
     );
     UserService.getClothing(id).then(
       (response) => {
         setContent(response.data[0]);
-        console.log(response.data[0])
       }
     );
+    UserService.getTags().then(
+      (response) => {
+        setTags(response.data);
+      },
+    );
+
   },
     []);
+  var currentTags = ''
+  var currentTagsArray = []
+  if (typeof content.tags !== "undefined") {
+    currentTags = content.tags
+  }
+
+  for (const n in tags) {
+    if (typeof tags[n].tagName !== "undefined") {
+      if (currentTags.includes(tags[n].tagName)) {
+        currentTagsArray.push(tags[n])
+      }
+    }
+  }
   const handleSubmit = (values, { setSubmitting }) => {
     var formData1 = new FormData();
     formData1.append("name", values.clothName)
@@ -59,13 +63,11 @@ const EditClothes = ({ history, match }) => {
     formData1.append("tags", values.tags.map(a => a.idTag).toString())
     UserService.updateClothing(id, formData1).then(
       () => {
-        // log.history.push("/clothes/list");
         window.location = '/clothes/list';
       },
       (error) => {
       }
     );
-    console.log();
     setTimeout(() => {
       setSubmitting(false);
     }, 500);
@@ -75,7 +77,11 @@ const EditClothes = ({ history, match }) => {
     <Paper className="paper">
       <h2>EDYTOWANIE UBRAŃ</h2>
       {content.name && <Formik
-        initialValues={{ file: null, clothName: content.name, ClotingType: '', tags: [] }}
+        initialValues={{
+          clothName: content.name,
+          ClotingType: 1,
+          tags: currentTagsArray,
+        }}
         onSubmit={handleSubmit}
       // validationSchema={EditClothesSchema}
       >
@@ -83,10 +89,7 @@ const EditClothes = ({ history, match }) => {
           <Form>
             <Grid container spacing={3} direction="column" justify="space-between">
               <Grid container justify="center">
-                <div>
-                  <img src={file ? URL.createObjectURL(file) : null} alt={file ? file.name : null} />
-                  <input type="file" onChange={fileHandler} />
-                </div>
+                <img className='clothPhoto' src={content.url} />
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -105,7 +108,7 @@ const EditClothes = ({ history, match }) => {
                 <Field
                   name="ClotingType"
                   label="Typ ubrania"
-                  options={ClotingTypes.map((entry) => ({
+                  options={clotingTypes.map((entry) => ({
                     value: entry.idClothingType,
                     label: entry.name
                   }))}
@@ -138,7 +141,7 @@ const EditClothes = ({ history, match }) => {
                   variant="contained"
                   color="primary"
                 >
-                  Dodaj ubranie
+                  Zapisz
                 </Button>
               </Grid>
             </Grid>
