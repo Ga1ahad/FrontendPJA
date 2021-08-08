@@ -33,7 +33,7 @@ const ReactTable = (props) => {
         <div>
             <Paper className="paper">
                 <h2>{siteName}</h2>
-                <a href={"/" + url + "/add/"}>
+                <a href={"/" + site_url + "/add/"}>
                     <Fab color="primary" className="tool">
                         <AddIcon></AddIcon>
                     </Fab>

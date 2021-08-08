@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Grid, Button, Paper, TextField } from '@material-ui/core';
-import * as Yup from 'yup';
+import { object, array, string } from 'yup'
 import {
   Autocomplete,
 } from 'formik-material-ui-lab';
@@ -11,9 +11,11 @@ import '../../index.css';
 import UserService from "../../Auth/services/user.service"
 import authService from "../../Auth/services/auth.service"
 
-const EditClothesSchema = Yup.object().shape({
-  clothName: Yup.string().min(2, 'Too Short!').max(255, 'Too Long!').required('Required'),
-});
+const editClothesSchema = object().shape({
+  clothName: string().min(2, 'Too Short!').max(255, 'Too Long!').required('Required'),
+  tags: array().required('At least one tag is required'),
+  ClotingType: string().required('Required')
+})
 
 const EditClothes = ({ history, match }) => {
   const isLoggedIn = authService.isLoggedIn();
@@ -79,11 +81,11 @@ const EditClothes = ({ history, match }) => {
       {content.name && <Formik
         initialValues={{
           clothName: content.name,
-          ClotingType: 1,
+          ClotingType: content.idClothingType,
           tags: currentTagsArray,
         }}
         onSubmit={handleSubmit}
-      // validationSchema={EditClothesSchema}
+        validationSchema={editClothesSchema}
       >
         {({ errors, handleChange, touched, initialValues }) => (
           <Form>
