@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Grid, Button, Paper, TextField } from '@material-ui/core';
-import * as Yup from 'yup';
+import { object, array, string } from 'yup'
 import {
   Autocomplete,
 } from 'formik-material-ui-lab';
@@ -11,10 +11,11 @@ import '../../index.css';
 import UserService from "../../Auth/services/user.service"
 import authService from "../../Auth/services/auth.service"
 
-// const AddClothSchema = Yup.object().shape({
-//   clothName: Yup.string().min(2, 'Too Short!').max(255, 'Too Long!').required('Required'),
-//   purpose: Yup.string().required('Required'),
-// });
+const addClothesSchema = object().shape({
+  clothName: string().min(2, 'Too Short!').max(255, 'Too Long!').required('Required'),
+  tags: array().required('At least one tag is required'),
+  ClotingType: string().required('Required')
+})
 
 const AddClothes = ({ log }) => {
   const isLoggedIn = authService.isLoggedIn();
@@ -59,6 +60,7 @@ const AddClothes = ({ log }) => {
   },
     []);
   const handleSubmit = (values, { setSubmitting }) => {
+
     var formData1 = new FormData();
     formData1.append("image", file);
     formData1.append("name", values.clothName)
@@ -90,7 +92,7 @@ const AddClothes = ({ log }) => {
       <Formik
         initialValues={{ file: null, clothName: '', ClotingType: '', tags: [] }}
         onSubmit={handleSubmit}
-      // validationSchema={AddClothSchema}
+        validationSchema={addClothesSchema}
       >
         {({ errors, handleChange, touched }) => (
           <Form>
@@ -98,7 +100,8 @@ const AddClothes = ({ log }) => {
               <Grid container justify="center">
                 <div>
                   <img src={file ? URL.createObjectURL(file) : null} alt={file ? file.name : null} />
-                  <input type="file" onChange={fileHandler} />
+                  <input id="file"
+                    name="file" type="file" onChange={fileHandler} />
                 </div>
               </Grid>
               <Grid item xs={12}>
