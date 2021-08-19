@@ -54,7 +54,6 @@ function EditTrip({ history, match }) {
     return (
         <Paper className="paper" >
             <h2>EDYTOWANIE PODRÓŻY</h2>
-            {content.tripName}
             {content.tripName && <Formik
                 initialValues={content}
                 onSubmit={handleSubmit}
