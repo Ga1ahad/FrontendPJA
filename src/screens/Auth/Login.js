@@ -1,8 +1,16 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Formik, Form } from 'formik';
-import { Container, CssBaseline, TextField, Button, Paper, Grid, Typography } from "@material-ui/core";
-import authService from "../Auth/services/auth.service";
+import {
+  Container,
+  CssBaseline,
+  TextField,
+  Button,
+  Paper,
+  Grid,
+  Typography,
+} from '@material-ui/core';
+import authService from './services/auth.service';
 import * as Yup from 'yup';
 import Logo from '../../assets/images/clothesy.png';
 
@@ -11,29 +19,29 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
 });
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(14),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     padding: theme.spacing(4),
   },
   form: {
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(3),
   },
 }));
 
 const Login = (log) => {
   const isLoggedIn = authService.isLoggedIn();
   if (isLoggedIn) {
-    log.history.push("/clothes/list");
+    log.history.push('/clothes/list');
   }
   const classes = useStyles();
   const handleSubmit = (values, { setSubmitting }) => {
     authService.login(values.email, values.password).then(
       () => {
-        log.history.push("/trip/list");
+        log.history.push('/trip/list');
         window.location.reload();
       },
       (error) => {
@@ -43,8 +51,7 @@ const Login = (log) => {
         //     error.response.data.message) ||
         //   error.message ||
         //   error.toString();
-
-      }
+      },
     );
     setTimeout(() => {
       setSubmitting(false);
@@ -61,9 +68,8 @@ const Login = (log) => {
   //   return errors;
   // };
   return (
-
     <Container component="main" maxWidth="xs">
-      <Paper className={classes.paper} >
+      <Paper className={classes.paper}>
         <img src={Logo} alt="Clothesy" className={classes.logo} />
         <Typography component="h1" variant="h5">
           Logowanie
@@ -86,9 +92,9 @@ const Login = (log) => {
                     variant="outlined"
                     onChange={handleChange}
                     autoComplete="email"
-                  // helperText={
-                  //   errors.email && touched.email ? errors.email : null
-                  // }
+                    // helperText={
+                    //   errors.email && touched.email ? errors.email : null
+                    // }
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -99,24 +105,21 @@ const Login = (log) => {
                     fullWidth
                     variant="outlined"
                     onChange={handleChange}
-                  // helperText={
-                  //   errors.password && touched.password ? errors.password : null
-                  // }
+                    // helperText={
+                    //   errors.password && touched.password ? errors.password : null
+                    // }
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                  >
+                  <Button type="submit" fullWidth variant="contained" color="primary">
                     Zaloguj się
                   </Button>
                 </Grid>
                 <Grid item xs={12}>
                   <a href="/register">
-                    <Typography align='center' variant='subtitle1'>Utwórz konto</Typography>
+                    <Typography align="center" variant="subtitle1">
+                      Utwórz konto
+                    </Typography>
                   </a>
                 </Grid>
               </Grid>
@@ -124,7 +127,7 @@ const Login = (log) => {
           )}
         </Formik>
       </Paper>
-    </Container >
+    </Container>
   );
 };
 
