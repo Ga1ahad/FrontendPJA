@@ -4,6 +4,8 @@ import { IconButton, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import WorkRounded from '@material-ui/icons/WorkRounded';
+import WorkOutline from '@material-ui/icons/WorkOutline';
 import './index.css';
 import userService from './Auth/services/user.service';
 
@@ -88,6 +90,22 @@ const ReactTable = (props) => {
                                             <IconButton onClick={() => userService.remove(row[id_name], url)}>
                                                 <DeleteIcon />
                                             </IconButton>
+                                            {site_url == 'trip' &&
+                                                <span>
+                                                    {row['suitcaseGenerated'] ? (
+                                                        <a href={"/" + site_url + "/suitcase/" + row[id_name]}>
+                                                            <IconButton>
+                                                                <WorkRounded />
+                                                            </IconButton>
+                                                        </a>
+                                                    ) : (
+                                                        <IconButton onClick={() => userService.postSuitcase(row[id_name])}>
+                                                            <WorkOutline />
+                                                        </IconButton>
+                                                    )}
+                                                </span>
+                                            }
+
                                         </TableCell>
                                     </TableRow>
                                 );

@@ -4,7 +4,8 @@ import EditClothes from './Clothes/EditClothes.js';
 import AddTrip from './Trip/AddTrip.js';
 import EditTrip from './Trip/EditTrip.js';
 import ListTrip from './Trip/ListTrip.js';
-import TodaySet from './Sets/TodaysSet.js';
+import AddSuitcase from './Sets/AddSuitcase';
+import Suitcase from './Sets/Suitcase';
 import Login from '../Auth/login';
 import Register from '../Auth/register';
 
@@ -13,24 +14,26 @@ import { WorkRounded, CalendarTodayRounded, AddRounded, TodayRounded, Collection
 
 const pathIds = {
     wardrobe: "wardrobe",
-    todaysSet: "todays-set",
+    createSet: 'create-set',
     addCloth: "add-cloth",
     editCloth: "edit-cloth",
     listTrip: "list-trip",
     addTrip: "add-trip",
     editTrip: "edit-trip",
+    suitcase: "suitcase",
     login: "sign-in",
     register: "sign-up",
 };
 
 const pathRouting = {
     wardrobe: "/clothes/list",
-    todaySet: "/todaysset",
+    createSet: '/createSet',
     addCloth: "/clothes/add",
     editCloth: "/clothes/edit/:id",
     listTrip: "/trip/list",
     addTrip: "/trip/add",
     editTrip: "/trip/edit/:id",
+    suitcase: "/trip/suitcase/:id",
     login: "login",
     register: "register",
 };
@@ -43,9 +46,9 @@ const loggedInRoutes = {
         icon: CollectionsRounded,
     },
     [pathIds.todaySet]: {
-        path: pathRouting.todaySet,
-        sidebarName: "ZESTAW NA DZIŚ",
-        component: TodaySet,
+        path: pathRouting.createSet,
+        sidebarName: 'STWÓRZ SET',
+        component: AddSuitcase,
         icon: TodayRounded,
     },
     [pathIds.addCloth]: {
@@ -78,6 +81,12 @@ const loggedInRoutes = {
         component: EditTrip,
         icon: CalendarTodayRounded,
     },
+    [pathIds.suitcase]: {
+        path: pathRouting.suitcase,
+        sidebarName: "WALIZKA",
+        component: Suitcase,
+        icon: WorkRounded,
+    },
 };
 
 const navbarRoutes = {
@@ -87,10 +96,10 @@ const navbarRoutes = {
         component: Wardrobe,
         icon: CollectionsRounded,
     },
-    [pathIds.todaySet]: {
-        path: pathRouting.todaySet,
-        sidebarName: "ZESTAW NA DZIŚ",
-        component: TodaySet,
+    [pathIds.createSet]: {
+        path: pathRouting.createSet,
+        sidebarName: 'STWÓRZ SET',
+        component: AddSuitcase,
         icon: TodayRounded,
     },
     [pathIds.addCloth]: {
