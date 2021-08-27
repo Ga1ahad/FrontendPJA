@@ -17,7 +17,6 @@ function EditTrip({ history, match }) {
         UserService.getTrip(id).then(
             (response) => {
                 setContent(response.data);
-                console.log(response.data)
             }
         );
     },
@@ -27,7 +26,6 @@ function EditTrip({ history, match }) {
         startTrip: Yup.string().required('Required'),
         endTrip: Yup.string().required('Required'),
         city: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-        zipCode: Yup.string().min(2, 'Too Short!').max(10, 'Too Long!').required('Required'),
         country: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
     });
 
@@ -116,20 +114,6 @@ function EditTrip({ history, match }) {
                                         defaultValue={initialValues.city}
                                         helperText={
                                             errors.city && touched.city ? errors.city : null
-                                        }
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        id="zipCode"
-                                        name="zipCode"
-                                        type="number"
-                                        label="Kod pocztowy"
-                                        fullWidth
-                                        onChange={handleChange}
-                                        defaultValue={initialValues.zipCode}
-                                        helperText={
-                                            errors.zipCode && touched.zipCode ? errors.zipCode : null
                                         }
                                     />
                                 </Grid>

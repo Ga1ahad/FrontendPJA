@@ -8,7 +8,6 @@ const columns = [
   { id: 'name', label: 'Nazwa' },
   { id: 'clothingTypeName', label: 'Typ' },
   { id: 'tags', label: 'Tagi' },
-  { id: 'idUser', label: 'Data dodania' },
 ];
 
 const siteName = 'SZAFA'

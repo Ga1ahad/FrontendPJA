@@ -12,7 +12,6 @@ const AddTripSchema = Yup.object().shape({
     startTrip: Yup.string().required('Required'),
     endTrip: Yup.string().required('Required'),
     city: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-    zipCode: Yup.number().min(2, 'Too Short!').required('Required'),
     country: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
 });
 const AddTrip = (log) => {
@@ -27,13 +26,6 @@ const AddTrip = (log) => {
                 window.location.reload();
             },
             (error) => {
-                // const resMessage =
-                //     (error.response &&
-                //         error.response.data &&
-                //         error.response.data.message) ||
-                //     error.message ||
-                //     error.toString();
-
             }
         );
         setTimeout(() => {
@@ -46,7 +38,7 @@ const AddTrip = (log) => {
             <Paper className="paper" >
                 <h2>PLANOWANIE PODRÓŻY</h2>
                 <Formik
-                    initialValues={{ tripName: '', startTrip: '', endTrip: '', city: '', zipCode: number, country: '', }}
+                    initialValues={{ tripName: '', startTrip: '', endTrip: '', city: '', country: '', }}
                     onSubmit={handleSubmit}
                     validationSchema={AddTripSchema}
                 >
@@ -102,19 +94,6 @@ const AddTrip = (log) => {
                                         onChange={handleChange}
                                         helperText={
                                             errors.city && touched.city ? errors.city : null
-                                        }
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        id="zipCode"
-                                        name="zipCode"
-                                        type="number"
-                                        label="Kod pocztowy"
-                                        fullWidth
-                                        onChange={handleChange}
-                                        helperText={
-                                            errors.zipCode && touched.zipCode ? errors.zipCode : null
                                         }
                                     />
                                 </Grid>

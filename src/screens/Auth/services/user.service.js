@@ -6,6 +6,7 @@ const TRIP_URL = "trip";
 const CLOTHING_URL = 'clothing'
 const TAG_URL = 'tag'
 const TYPE_URL = 'clothingtype'
+const SUITCASE_URL = 'suitcase';
 
 const getTrips = () => {
     return axios.get(API_URL + TRIP_URL, { headers: authHeader() });
@@ -51,6 +52,14 @@ const getTags = () => {
 const getTypes = () => {
     return axios.get(API_URL + TYPE_URL);
 };
+const getSuitcase = (id) => {
+    return axios.get(API_URL + SUITCASE_URL + '/' + id, { headers: authHeader() });
+};
+const postSuitcase = (id) => {
+    return axios.post(API_URL + SUITCASE_URL + '/' + id, { headers: authHeader() }).then(() => {
+        window.location.reload();
+    })
+}
 
 export default {
     getTypes,
@@ -63,5 +72,7 @@ export default {
     postClothes,
     updateClothing,
     getClothing,
-    getTags
+    getTags,
+    postSuitcase,
+    getSuitcase,
 };
