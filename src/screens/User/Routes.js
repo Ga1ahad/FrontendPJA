@@ -96,12 +96,6 @@ const navbarRoutes = {
         component: Wardrobe,
         icon: CollectionsRounded,
     },
-    [pathIds.createSet]: {
-        path: pathRouting.createSet,
-        sidebarName: 'STWÓRZ SET',
-        component: AddSuitcase,
-        icon: TodayRounded,
-    },
     [pathIds.addCloth]: {
         path: pathRouting.addCloth,
         sidebarName: "DODAJ UBRANIE",

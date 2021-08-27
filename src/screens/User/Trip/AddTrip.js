@@ -3,7 +3,6 @@ import { Grid, Button, Paper, TextField } from '@material-ui/core';
 import { Formik, Form, } from 'formik';
 import '../../index.css'
 import * as Yup from 'yup';
-import { number } from 'prop-types';
 import UserService from "../../Auth/services/user.service"
 import authService from "../../Auth/services/auth.service"
 
