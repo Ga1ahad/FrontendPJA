@@ -74,7 +74,7 @@ class PlanTrip extends Component {
 
   submitHandler = e => {
     e.preventDefault()
-    fetch('http://localhost:59131/api/users/2/Trip', {
+    fetch('https://clothesyapi20210827135835.azurewebsites.net/api/users/2/Trip', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(this.state)

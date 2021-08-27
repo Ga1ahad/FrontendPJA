@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = "http://localhost:59131/api/";
+const API_URL = "https://clothesyapi20210827135835.azurewebsites.net/api/";
 const TRIP_URL = "trip";
 const CLOTHING_URL = 'clothing'
 const TAG_URL = 'tag'

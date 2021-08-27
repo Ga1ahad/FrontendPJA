@@ -1,7 +1,7 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
-const API_URL = "http://localhost:59131/api/user/";
+const API_URL = "https://clothesyapi20210827135835.azurewebsites.net/api/user/";
 
 const register = (Email, Password) => {
     return axios
