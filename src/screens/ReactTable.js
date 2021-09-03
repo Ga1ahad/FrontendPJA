@@ -35,11 +35,13 @@ const ReactTable = (props) => {
         <div>
             <Paper className="paper">
                 <h2>{siteName}</h2>
-                <a href={"/" + site_url + "/add/"}>
-                    <Fab color="primary" className="tool">
-                        <AddIcon></AddIcon>
-                    </Fab>
-                </a>
+                {site_url != 'suitcase' &&
+                    <a href={"/" + site_url + "/add/"}>
+                        <Fab color="primary" className="tool">
+                            <AddIcon></AddIcon>
+                        </Fab>
+                    </a>
+                }
                 <TableContainer className={classes.container, 'reactTable'}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
@@ -53,9 +55,11 @@ const ReactTable = (props) => {
                                         {column.label}
                                     </TableCell>
                                 ))}
-                                <TableCell align="left">
-                                    Akcje
-                                </TableCell>
+                                {site_url != 'suitcase' &&
+                                    <TableCell align="left">
+                                        Akcje
+                                    </TableCell>
+                                }
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -81,32 +85,37 @@ const ReactTable = (props) => {
                                                 </TableCell>
                                             );
                                         })}
-                                        <TableCell>
-                                            <a href={"/" + site_url + "/edit/" + row[id_name]}>
-                                                <IconButton>
-                                                    <EditIcon />
-                                                </IconButton>
-                                            </a>
-                                            <IconButton onClick={() => userService.remove(row[id_name], url)}>
-                                                <DeleteIcon />
-                                            </IconButton>
-                                            {site_url == 'trip' &&
-                                                <span>
-                                                    {row['suitcaseGenerated'] ? (
-                                                        <a href={"/" + site_url + "/suitcase/" + row[id_name]}>
+                                        {site_url != 'suitcase' &&
+                                            <TableCell>
+                                                {!row['suitcaseGenerated'] &&
+                                                    <span>
+                                                        <a href={"/" + site_url + "/edit/" + row[id_name]}>
                                                             <IconButton>
-                                                                <WorkRounded />
+                                                                <EditIcon />
                                                             </IconButton>
                                                         </a>
-                                                    ) : (
-                                                        <IconButton onClick={() => userService.postSuitcase(row[id_name])}>
-                                                            <WorkOutline />
+                                                        <IconButton onClick={() => userService.remove(row[id_name], url)}>
+                                                            <DeleteIcon />
                                                         </IconButton>
-                                                    )}
-                                                </span>
-                                            }
-
-                                        </TableCell>
+                                                    </span>
+                                                }
+                                                {site_url == 'trip' &&
+                                                    <span>
+                                                        {row['suitcaseGenerated'] ? (
+                                                            <a href={"/" + site_url + "/suitcase/" + row[id_name]}>
+                                                                <IconButton>
+                                                                    <WorkRounded />
+                                                                </IconButton>
+                                                            </a>
+                                                        ) : (
+                                                            <IconButton onClick={() => userService.postSuitcase(row[id_name])}>
+                                                                <WorkOutline />
+                                                            </IconButton>
+                                                        )}
+                                                    </span>
+                                                }
+                                            </TableCell>
+                                        }
                                     </TableRow>
                                 );
                             })}
